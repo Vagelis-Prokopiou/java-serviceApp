@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,14 +25,22 @@ public class MainActivity extends AppCompatActivity {
         // Get the Textview
         final TextView textview = (TextView) findViewById(R.id.textView);
 
+        // Get the total kms input.
+        final EditText editText_total_kms = (EditText) findViewById(R.id.editText_total_kms);
+
         // Set a listener to btn_proceed.
         btn_proceed.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                textview.setText("I added this text!!!!!");
+                // Todo: Work with the int and set the global_kms.
+                int val = Integer.parseInt(editText_total_kms.getText().toString());
+                String mystring = "This is my string";
+                if (val !=0) {
+                    textview.setText(mystring);
+                }
+                // Set the global_kms variable.
+//                int global_kms = editText_total_kms;
             }
         });
-
-
 
 
     }
