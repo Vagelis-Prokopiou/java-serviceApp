@@ -2,6 +2,7 @@ package com.github.vaggos.serviceapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,10 +21,15 @@ public class MainActivity extends AppCompatActivity {
         Button btn_available = (Button) findViewById(R.id.btn_available);
 
         // Get the Textview
-        TextView textview = (TextView) findViewById(R.id.textView);
+        final TextView textview = (TextView) findViewById(R.id.textView);
 
         // Set a listener to btn_proceed.
-//        btn_proceed.setOnClickListener();
+        btn_proceed.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                textview.setText("I added this text!!!!!");
+            }
+        });
+
 
 
 
