@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         Button btn_update = (Button) findViewById(R.id.btn_update);
         Button btn_insert = (Button) findViewById(R.id.btn_insert);
         Button btn_available = (Button) findViewById(R.id.btn_available);
+        Button btn_done = (Button) findViewById(R.id.btn_done);
 
         // Get the Textview
         final TextView textview = (TextView) findViewById(R.id.textView);
