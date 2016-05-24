@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ServiceApp</string>
+    <string name="proceed">Proceed</string>
+    <string name="run_check">Run check</string>
+    <string name="update_entry">Update entry</string>
+    <string name="insert_entry">Insert entry</string>
+    <string name="available_entries">Available entries</string>
 </resources>
