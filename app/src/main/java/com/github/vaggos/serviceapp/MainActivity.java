@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Create the global variables.
+    private static int global_kms;
+    private static boolean proceed;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,17 +35,27 @@ public class MainActivity extends AppCompatActivity {
         // Set a listener to btn_proceed.
         btn_proceed.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                // Todo: Work with the int and set the global_kms.
-                int val = Integer.parseInt(editText_total_kms.getText().toString());
-                String mystring = "This is my string";
-                if (val !=0) {
-                    textview.setText(mystring);
+                // If a value has been provided execute try.
+                try {
+                    // Get the value of the text field.
+                    int val = Integer.parseInt(editText_total_kms.getText().toString());
+                    // Set the global_kms variable.
+                    MainActivity.global_kms = val;
+                    // Set the global proceed variable.
+                    MainActivity.proceed = true;
+                    // Update the text view.
+                    textview.setText(
+                            "You can proceed." +
+                                    "\nThe total kms are " + String.valueOf(MainActivity.global_kms) + " kms."
+                    );
+                } catch (NumberFormatException e) {
+                    // If no value has been provided, show this message.
+                    MainActivity.proceed = false;
+                    textview.setText(
+                            "You must provide a value.\nPlease, try again."
+                    );
                 }
-                // Set the global_kms variable.
-//                int global_kms = editText_total_kms;
             }
         });
-
-
     }
 }
