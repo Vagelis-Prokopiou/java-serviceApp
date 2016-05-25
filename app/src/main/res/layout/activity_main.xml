@@ -38,6 +38,16 @@
             android:ems="10"
             android:inputType="number" />
 
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/results"
+            android:id="@+id/textView_results"
+            android:layout_below="@+id/editText_total_kms"
+            android:layout_alignRight="@+id/textView"
+            android:layout_alignEnd="@+id/textView" />
+
     </RelativeLayout>
 
     <RelativeLayout

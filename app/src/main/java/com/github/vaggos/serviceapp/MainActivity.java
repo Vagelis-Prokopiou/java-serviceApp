@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     private static boolean proceed;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Read the data.cvs file.
         InputStream in = getResources().openRawResource(R.raw.data);
-        ReadCSV csvFile = new ReadCSV(in);
-        final List dataList = csvFile.read();
+        final ReadCSV csv = new ReadCSV(in);
+        final List<String[]> dataList = csv.read();
 
 
         // Get the buttons.
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the Textview.
         final TextView textview = (TextView) findViewById(R.id.textView);
+        final TextView textView_results = (TextView) findViewById(R.id.textView_results);
 
         // Get the total kms input.
         final EditText editText_total_kms = (EditText) findViewById(R.id.editText_total_kms);
@@ -69,5 +69,22 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
+        
+        // Set a listener to btn_available.
+        btn_available.setOnClickListener(new Button.OnClickListener() {
+            // See: http://www.dummies.com/how-to/content/use-array-lists-in-java.html
+            public void onClick(View v) {
+                // Create a variable to hold all the values to be displayed.
+                String message = "Results:\n";
+                for (int i = 1; i < dataList.size(); i++) {
+                    message = message + dataList.get(i)[0] + ": Last changed on " + dataList.get(i)[1] + ".\n";
+                }
+                textView_results.setText(message);
+            }
+        }
+
+    );
 }
+}
+
+
