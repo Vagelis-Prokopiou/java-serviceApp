@@ -7,12 +7,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.Scanner;
+
 public class MainActivity extends AppCompatActivity {
 
     // Create the global variables.
     private static int global_kms;
     private static boolean proceed;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         Button btn_available = (Button) findViewById(R.id.btn_available);
         Button btn_done = (Button) findViewById(R.id.btn_done);
 
-        // Get the Textview
+        // Get the Textview.
         final TextView textview = (TextView) findViewById(R.id.textView);
 
         // Get the total kms input.
