@@ -7,22 +7,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.util.Scanner;
+import java.io.InputStream;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
 
     // Create the global variables.
     private static int global_kms;
     private static boolean proceed;
-    
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Read the data.cvs file.
+        InputStream in = getResources().openRawResource(R.raw.data);
+        ReadCSV csvFile = new ReadCSV(in);
+        final List dataList = csvFile.read();
+
 
         // Get the buttons.
         Button btn_proceed = (Button) findViewById(R.id.btn_proceed);
