@@ -1,5 +1,6 @@
 package com.github.vaggos.serviceapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -124,6 +125,14 @@ public class MainActivity extends AppCompatActivity {
                     // The global_kms has not been provided.
                     textView_results.setText("Please, provide the total kms of the vehicle.");
                 }
+            }
+        });
+
+        // Set a listener to btn_update.
+        btn_update.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, UpdateActivity.class);
+                MainActivity.this.startActivity(myIntent);
             }
         });
 

@@ -8,4 +8,6 @@
     <string name="done">Done</string>
     <string name="total_kms">Please, provide\nthe total kms of the vehicle below and press \"Proceed\".</string>
     <string name="results">Results</string>
+    <string name="title_activity_update">Update a data entry.</string>
+    <string name="action_settings">Settings</string>
 </resources>
