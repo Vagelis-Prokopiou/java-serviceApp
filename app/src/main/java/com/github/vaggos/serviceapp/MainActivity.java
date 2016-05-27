@@ -12,13 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-
-    // Create the global variables.
-    private static int global_kms;
-    private static boolean proceed;
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Create the global_date.
         final Date today = new Date();
+
+        // Create the global_kms variable;
+        final int[] global_kms = {0};
 
         // Read the data.cvs file.
         InputStream in = getResources().openRawResource(R.raw.data);
@@ -56,17 +53,14 @@ public class MainActivity extends AppCompatActivity {
                     // Get the value of the text field.
                     int val = Integer.parseInt(editText_total_kms.getText().toString());
                     // Set the global_kms variable.
-                    MainActivity.global_kms = val;
-                    // Set the global proceed variable.
-                    MainActivity.proceed = true;
+                    global_kms[0] = val;
                     // Update the text view.
                     textview.setText(
                             "You can proceed." +
-                                    "\nThe total kms are " + String.valueOf(MainActivity.global_kms) + " kms."
+                                    "\nThe total kms are " + String.valueOf(global_kms[0]) + " kms."
                     );
                 } catch (NumberFormatException e) {
                     // If no value has been provided, show this message.
-                    MainActivity.proceed = false;
                     textview.setText(
                             "You must provide a value.\nPlease, try again."
                     );
@@ -80,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Prepare the message that will be displayed.
                 String message = "Results\n";
-                if (global_kms > 0) {
+                // Check if the global_kms has been set.
+                if (global_kms[0] > 0) {
                     // Loop over your data.
                     for (int i = 1; i < dataList.size(); i++) {
                         // Create the local variables.
@@ -88,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
                         int kms_changed = Integer.parseInt(dataList.get(i)[3].toString());
                         int kms_interval = Integer.parseInt(dataList.get(i)[4].toString());
                         // Check the kms.
-                        if (global_kms - kms_changed >= kms_interval) {
+                        if (global_kms[0] - kms_changed >= kms_interval) {
                             // Build the message.
-                            message += "• " + spare_part + ": Exceeded the allowed " + kms_interval + " kms between changes for " + (global_kms - kms_changed) + " kms.\n";
+                            message += "• " + spare_part + ": Exceeded the allowed " + kms_interval + " kms between changes for " + (global_kms[0] - kms_changed) + " kms.\n";
                         }
                     }
                     textView_results.setText(message);
@@ -102,18 +97,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Set a listener to btn_available.
         btn_available.setOnClickListener(new Button.OnClickListener() {
-                                             // See: http://www.dummies.com/how-to/content/use-array-lists-in-java.html
-                                             public void onClick(View v) {
-                                                 // Create a variable to hold all the values to be displayed.
-                                                 String message = "Results:\n";
-                                                 for (int i = 1; i < dataList.size(); i++) {
-                                                     message = message + dataList.get(i)[0] + ": Last changed on " + dataList.get(i)[1] + ".\n";
-                                                 }
-                                                 textView_results.setText(message);
-                                             }
-                                         }
-
-        );
+            // See: http://www.dummies.com/how-to/content/use-array-lists-in-java.html
+            public void onClick(View v) {
+                // Create a variable to hold all the values to be displayed.
+                String message = "Results:\n";
+                for (int i = 1; i < dataList.size(); i++) {
+                    message = message + dataList.get(i)[0] + ": Last changed on " + dataList.get(i)[1] + ".\n";
+                }
+                textView_results.setText(message);
+            }
+        });
     }
 }
 
