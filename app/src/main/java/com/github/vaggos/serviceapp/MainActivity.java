@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         int kms_interval = Integer.parseInt(dataList.get(i)[4].toString());
                         // Todo: Construct the date and check the dates.
                         // Build the date_changed date.
-                        // See: http://stackoverflow.com/questions/8573250/android-how-can-i-convert-string-to-date #134
+                        // See: http://stackoverflow.com/questions/8573250/android-how-can-i-convert-string-to-date (#134)
                         String dateChanged = dataList.get(i)[1].toString();
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                         Date date_changed = null;
@@ -110,11 +110,15 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         // Check the dates.
-                        // if today is after date_interval.
                         if (today.after(date_interval)) {
-                            message += "• " + spare_part + ": Exceeded the allowed " + dateInterval + " months between changes. It should have been changed on " + date_interval + "\n";
+                            // Format the date to ISO, for printing.
+                            // See: http://java67.blogspot.gr/2013/01/how-to-format-date-in-java-simpledateformat-example.html
+                            SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
+                            String stringDate = date_format.format(date_interval);
+                            message += "• " + spare_part + ": Exceeded the allowed " + dateInterval + " months between changes. It should have been changed on " + stringDate + "\n";
                         }
                     }
+                    // Print the result.
                     textView_results.setText(message);
                 } else {
                     // The global_kms has not been provided.
