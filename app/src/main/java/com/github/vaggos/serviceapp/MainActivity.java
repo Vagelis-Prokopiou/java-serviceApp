@@ -1,15 +1,13 @@
 package com.github.vaggos.serviceapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.format.DateFormat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.InputStream;
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -98,23 +96,28 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         // Build the date_interval date.
+                        // See: http://stackoverflow.com/questions/1311143/java-util-date-deleting-three-months-from-a-date (#38)
                         int dateInterval = Integer.parseInt(dataList.get(i)[2].toString());
                         Calendar calendar = Calendar.getInstance();
-                        calendar.setTime(today);
-                        calendar.add(Calendar.MONTH, -dateInterval);
+                        calendar.setTime(date_changed);
+                        calendar.add(Calendar.MONTH, dateInterval);
                         Date date_interval = calendar.getTime();
+
                         // Check the kms.
                         if (global_kms[0] - kms_changed >= kms_interval) {
                             // Build the message.
-                            message += "• " + spare_part + ": Exceeded the allowed " + kms_interval + " kms between changes for " + (global_kms[0] - kms_changed) + " kms.\n";
+                            message += "• " + spare_part + ": Exceeded the allowed " + kms_interval + " kms between changes, for " + (global_kms[0] - kms_changed) + " kms.\n";
                         }
+
                         // Check the dates.
-                        if (true) {
-                            message += date_interval + "\n";
+                        // if today is after date_interval.
+                        if (today.after(date_interval)) {
+                            message += "• " + spare_part + ": Exceeded the allowed " + dateInterval + " months between changes. It should have been changed on " + date_interval + "\n";
                         }
                     }
                     textView_results.setText(message);
                 } else {
+                    // The global_kms has not been provided.
                     textView_results.setText("Please, provide the total kms of the vehicle.");
                 }
             }
