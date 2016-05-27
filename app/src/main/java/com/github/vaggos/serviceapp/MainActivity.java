@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                             // See: http://java67.blogspot.gr/2013/01/how-to-format-date-in-java-simpledateformat-example.html
                             SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
                             String stringDate = date_format.format(date_interval);
-                            message += "• " + spare_part + ": Exceeded the allowed " + dateInterval + " months between changes. It should have been changed on " + stringDate + "\n";
+                            message += "• " + spare_part + ": Exceeded the allowed " + dateInterval + " months between changes. It should have been changed on " + stringDate + ".\n";
                         }
                     }
                     // Print the result.
