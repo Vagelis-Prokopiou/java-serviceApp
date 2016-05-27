@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -86,22 +87,31 @@ public class MainActivity extends AppCompatActivity {
                         int kms_changed = Integer.parseInt(dataList.get(i)[3].toString());
                         int kms_interval = Integer.parseInt(dataList.get(i)[4].toString());
                         // Todo: Construct the date and check the dates.
+                        // Build the date_changed date.
                         // See: http://stackoverflow.com/questions/8573250/android-how-can-i-convert-string-to-date #134
                         String dateChanged = dataList.get(i)[1].toString();
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date_changed = null;
                         try {
-                            Date date_changed = format.parse(dateChanged);
+                            date_changed = format.parse(dateChanged);
                         } catch (ParseException e) {
-                            // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
+                        // Build the date_interval date.
+                        int dateInterval = Integer.parseInt(dataList.get(i)[2].toString());
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(today);
+                        calendar.add(Calendar.MONTH, -dateInterval);
+                        Date date_interval = calendar.getTime();
                         // Check the kms.
                         if (global_kms[0] - kms_changed >= kms_interval) {
                             // Build the message.
                             message += "• " + spare_part + ": Exceeded the allowed " + kms_interval + " kms between changes for " + (global_kms[0] - kms_changed) + " kms.\n";
                         }
                         // Check the dates.
-//
+                        if (true) {
+                            message += date_interval + "\n";
+                        }
                     }
                     textView_results.setText(message);
                 } else {
