@@ -74,6 +74,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Set a listener to btn_check.
+        btn_check.setOnClickListener(new Button.OnClickListener() {
+            // See: http://www.dummies.com/how-to/content/use-array-lists-in-java.html
+            public void onClick(View v) {
+                // Prepare the message that will be displayed.
+                String message = "Results\n";
+                if (global_kms > 0) {
+                    // Loop over your data.
+                    for (int i = 1; i < dataList.size(); i++) {
+                        // Create the local variables.
+                        String spare_part = dataList.get(i)[0].toString();
+                        int kms_changed = Integer.parseInt(dataList.get(i)[3].toString());
+                        int kms_interval = Integer.parseInt(dataList.get(i)[4].toString());
+                        // Check the kms.
+                        if (global_kms - kms_changed >= kms_interval) {
+                            // Build the message.
+                            message += "• " + spare_part + ": Exceeded the allowed " + kms_interval + " kms between changes for " + (global_kms - kms_changed) + " kms.\n";
+                        }
+                    }
+                    textView_results.setText(message);
+                } else {
+                    textView_results.setText("Please, provide the total kms of the vehicle.");
+                }
+            }
+        });
+
         // Set a listener to btn_available.
         btn_available.setOnClickListener(new Button.OnClickListener() {
                                              // See: http://www.dummies.com/how-to/content/use-array-lists-in-java.html
@@ -84,17 +110,6 @@ public class MainActivity extends AppCompatActivity {
                                                      message = message + dataList.get(i)[0] + ": Last changed on " + dataList.get(i)[1] + ".\n";
                                                  }
                                                  textView_results.setText(message);
-                                             }
-                                         }
-
-        );
-
-        // Set a listener to btn_check.
-        btn_check.setOnClickListener(new Button.OnClickListener() {
-                                             // See: http://www.dummies.com/how-to/content/use-array-lists-in-java.html
-                                             public void onClick(View v) {
-
-                                                 textView_results.setText(today.toString());
                                              }
                                          }
 
