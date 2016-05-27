@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Create the global_date.
+        final Date today = new Date();
 
         // Read the data.cvs file.
         InputStream in = getResources().openRawResource(R.raw.data);
@@ -69,22 +73,33 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        
+
         // Set a listener to btn_available.
         btn_available.setOnClickListener(new Button.OnClickListener() {
-            // See: http://www.dummies.com/how-to/content/use-array-lists-in-java.html
-            public void onClick(View v) {
-                // Create a variable to hold all the values to be displayed.
-                String message = "Results:\n";
-                for (int i = 1; i < dataList.size(); i++) {
-                    message = message + dataList.get(i)[0] + ": Last changed on " + dataList.get(i)[1] + ".\n";
-                }
-                textView_results.setText(message);
-            }
-        }
+                                             // See: http://www.dummies.com/how-to/content/use-array-lists-in-java.html
+                                             public void onClick(View v) {
+                                                 // Create a variable to hold all the values to be displayed.
+                                                 String message = "Results:\n";
+                                                 for (int i = 1; i < dataList.size(); i++) {
+                                                     message = message + dataList.get(i)[0] + ": Last changed on " + dataList.get(i)[1] + ".\n";
+                                                 }
+                                                 textView_results.setText(message);
+                                             }
+                                         }
 
-    );
-}
+        );
+
+        // Set a listener to btn_check.
+        btn_check.setOnClickListener(new Button.OnClickListener() {
+                                             // See: http://www.dummies.com/how-to/content/use-array-lists-in-java.html
+                                             public void onClick(View v) {
+
+                                                 textView_results.setText(today.toString());
+                                             }
+                                         }
+
+        );
+    }
 }
 
 
