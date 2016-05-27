@@ -2,17 +2,21 @@ package com.github.vaggos.serviceapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.InputStream;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         InputStream in = getResources().openRawResource(R.raw.data);
         final ReadCSV csv = new ReadCSV(in);
         final List<String[]> dataList = csv.read();
-
 
         // Get the buttons.
         Button btn_proceed = (Button) findViewById(R.id.btn_proceed);
@@ -79,14 +82,26 @@ public class MainActivity extends AppCompatActivity {
                     // Loop over your data.
                     for (int i = 1; i < dataList.size(); i++) {
                         // Create the local variables.
-                        String spare_part = dataList.get(i)[0].toString();
+                        String spare_part = dataList.get(i)[0];
                         int kms_changed = Integer.parseInt(dataList.get(i)[3].toString());
                         int kms_interval = Integer.parseInt(dataList.get(i)[4].toString());
+                        // Todo: Construct the date and check the dates.
+                        // See: http://stackoverflow.com/questions/8573250/android-how-can-i-convert-string-to-date #134
+                        String dateChanged = dataList.get(i)[1].toString();
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                        try {
+                            Date date_changed = format.parse(dateChanged);
+                        } catch (ParseException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
                         // Check the kms.
                         if (global_kms[0] - kms_changed >= kms_interval) {
                             // Build the message.
                             message += "• " + spare_part + ": Exceeded the allowed " + kms_interval + " kms between changes for " + (global_kms[0] - kms_changed) + " kms.\n";
                         }
+                        // Check the dates.
+//
                     }
                     textView_results.setText(message);
                 } else {
