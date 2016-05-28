@@ -1,3 +1,4 @@
+// Todo: Fix the main page. Make everything a unique activity.
 package com.github.vaggos.serviceapp;
 
 import android.content.DialogInterface;
