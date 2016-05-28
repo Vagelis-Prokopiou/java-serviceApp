@@ -33,6 +33,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.github.vaggos.serviceapp.MainActivity" />
         </activity>
+        <activity
+            android:name=".AvailableActivity"
+            android:label="@string/title_activity_available"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.github.vaggos.serviceapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

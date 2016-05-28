@@ -46,14 +46,6 @@
                     android:text="@string/update_entry" />
 
                 <Button
-                    android:id="@+id/btn_insert"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/scrollView_2"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/insert_entry" />
-
-                <Button
                     android:id="@+id/btn_available"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
