@@ -10,4 +10,12 @@
     tools:context="com.github.vaggos.serviceapp.UpdateActivityFragment">
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:text="Test text view"
+        android:id="@+id/textView_test"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

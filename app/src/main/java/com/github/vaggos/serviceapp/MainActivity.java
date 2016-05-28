@@ -4,6 +4,7 @@ package com.github.vaggos.serviceapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Create the global_date.
         final Date today = new Date();
-
 
         // Read the data.cvs file.
         InputStream in = getResources().openRawResource(R.raw.data);
@@ -129,8 +129,13 @@ public class MainActivity extends AppCompatActivity {
         btn_update.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 // Launch the Update Activity.
-                Intent myIntent = new Intent(MainActivity.this, UpdateActivity.class);
-                MainActivity.this.startActivity(myIntent);
+                Intent updateIntent = new Intent(MainActivity.this, UpdateActivity.class);
+                // Prepare to send the dataList.
+                // Todo: Maybe I dont have to pass this. Construct it directly in the update activity.
+//                List<String[]> dataList_to_pass =dataList;
+////                dataList_to_pass = dataList;
+//                updateIntent.putExtra("dataList", (Parcelable) dataList_to_pass);
+                startActivity(updateIntent);
             }
         });
 
@@ -151,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         if (global_kms == 0) {
             // Launch alert message
             new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("Total vehicle kms")
+                    .setTitle("Vehicle kilometres")
                     .setMessage("Please provide the vehicle's total kilometres/miles to continue.")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
