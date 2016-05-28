@@ -41,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
         Button btn_available = (Button) findViewById(R.id.btn_available);
 
         // Get the Textview.
-        final TextView textView_results = (TextView) findViewById(R.id.textView_results);
+//        final TextView textView_results = (TextView) findViewById(R.id.textView_results);
 
         // Get the total kms input.
-        final EditText editText_total_kms = (EditText) findViewById(R.id.editText_total_kms);
+//        final EditText editText_total_kms = (EditText) findViewById(R.id.editText_total_kms);
 
 
         // Set a listener to btn_check.
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 1; i < dataList.size(); i++) {
                     message = message + dataList.get(i)[0] + ": Last changed on " + dataList.get(i)[1] + ".\n";
                 }
-                textView_results.setText(message);
+//                textView_results.setText(message);
             }
         });
     }
