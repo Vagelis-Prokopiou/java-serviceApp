@@ -66,12 +66,7 @@ public class MainActivity extends AppCompatActivity {
                             "You can proceed." +
                                     "\nThe total kms are " + String.valueOf(MainActivity.global_kms) + " kms."
                     );
-                } catch (NumberFormatException e) {
-                    // If no value has been provided, show this message.
-//                    textview.setText(
-//                            "You must provide a value.\nPlease, try again."
-//                    );
-                }
+                } catch (NumberFormatException e) {/* Code here if necessary. */}
                 // Alert if global_kms == 0.
                 alert(MainActivity.global_kms);
             }
@@ -81,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         btn_check.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 // Prepare the message that will be displayed.
-                String message = "Results\n";
+                String message = "Results:\n";
                 // Check if the MainActivity.global_kms has been set.
                 if (MainActivity.global_kms > 0) {
                     // Loop over your data.
@@ -125,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
                     textView_results.setText(message);
                 } else {
                     // The MainActivity.global_kms has not been provided. Show alert message.
-//                    textView_results.setText("Please, provide the total kms of the vehicle.");
                     alert(MainActivity.global_kms);
                 }
             }
@@ -134,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         // Set a listener to btn_update.
         btn_update.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                // Launch the Update Activity.
                 Intent myIntent = new Intent(MainActivity.this, UpdateActivity.class);
                 MainActivity.this.startActivity(myIntent);
             }
@@ -149,14 +144,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 textView_results.setText(message);
             }
-        });
-
-        // Set a listener to btn_available.
-        btn_done.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                alert(MainActivity.global_kms);
-            }
-
         });
     }
 
