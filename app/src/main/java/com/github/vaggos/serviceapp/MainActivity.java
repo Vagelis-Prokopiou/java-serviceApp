@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Set a listener to btn_check.
         btn_check.setOnClickListener(new Button.OnClickListener() {
-            // See: http://www.dummies.com/how-to/content/use-array-lists-in-java.html
             public void onClick(View v) {
                 // Prepare the message that will be displayed.
                 String message = "Results\n";
@@ -87,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                         int kms_interval = Integer.parseInt(dataList.get(i)[4].toString());
                         // Todo: Construct the date and check the dates.
                         // Build the date_changed date.
-                        // See: http://stackoverflow.com/questions/8573250/android-how-can-i-convert-string-to-date (#134)
                         String dateChanged = dataList.get(i)[1].toString();
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                         Date date_changed = null;
@@ -97,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         // Build the date_interval date.
-                        // See: http://stackoverflow.com/questions/1311143/java-util-date-deleting-three-months-from-a-date (#38)
                         int dateInterval = Integer.parseInt(dataList.get(i)[2].toString());
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(date_changed);
@@ -113,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
                         // Check the dates.
                         if (today.after(date_interval)) {
                             // Format the date to ISO, for printing.
-                            // See: http://java67.blogspot.gr/2013/01/how-to-format-date-in-java-simpledateformat-example.html
                             SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
                             String stringDate = date_format.format(date_interval);
                             message += "• " + spare_part + ": Exceeded the allowed " + dateInterval + " months between changes. It should have been changed on " + stringDate + ".\n";
@@ -138,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Set a listener to btn_available.
         btn_available.setOnClickListener(new Button.OnClickListener() {
-            // See: http://www.dummies.com/how-to/content/use-array-lists-in-java.html
             public void onClick(View v) {
                 // Create a variable to hold all the values to be displayed.
                 String message = "Results:\n";
