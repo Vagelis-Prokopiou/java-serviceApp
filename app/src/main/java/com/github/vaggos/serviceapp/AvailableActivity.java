@@ -31,7 +31,7 @@ public class AvailableActivity extends AppCompatActivity {
         final TextView textView_available = (TextView) findViewById(R.id.textView_available);
 
         // Create a variable to hold all the values to be displayed.
-        String message = "Results:\n\n";
+        String message = "The current available data entries are:\n\n";
         for (int i = 1; i < dataList.size(); i++) {
             message = message + dataList.get(i)[0] + ": Last changed on " + dataList.get(i)[1] + ".\n";
         }

@@ -1,4 +1,5 @@
-// Todo: Fix the main page. Make everything a unique activity.
+// Todo: Add scrollview to available activity.
+// Todo: Add scrollview to check activity.
 package com.github.vaggos.serviceapp;
 
 import android.content.Intent;

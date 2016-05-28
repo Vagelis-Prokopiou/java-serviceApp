@@ -10,17 +10,16 @@
     tools:context="com.github.vaggos.serviceapp.MainActivity">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_weight=".7">
+        android:layout_alignParentTop="true">
 
         <ScrollView
             android:id="@+id/scrollView_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true">
 
@@ -28,6 +27,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/thanks"
+                    android:id="@+id/textView_thanks"
+                    android:paddingBottom="20dp"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="@string/welcome_message"
+                    android:id="@+id/textView"
+                    android:paddingBottom="5dp" />
 
                 <Button
                     android:id="@+id/btn_check"

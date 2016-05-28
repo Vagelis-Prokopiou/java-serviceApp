@@ -13,4 +13,6 @@
     <string name="title_activity_check">Run Inspection</string>
     <string name="vehicle_kms">Vehicle kms</string>
     <string name="title_activity_available">Available data entries</string>
+    <string name="welcome_message">This app will help you manage your vehicle\'s periodic maintenance.\n To continue, select one of the options below.</string>
+    <string name="thanks">Thank you for using ServiceApp</string>
 </resources>
