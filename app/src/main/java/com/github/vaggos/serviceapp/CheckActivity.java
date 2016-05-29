@@ -30,8 +30,6 @@ public class CheckActivity extends AppCompatActivity {
         setContentView(R.layout.activity_check);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Read the data.cvs file.
