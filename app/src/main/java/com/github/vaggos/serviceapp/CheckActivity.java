@@ -66,8 +66,6 @@ public class CheckActivity extends AppCompatActivity {
 //                                    "\nThe total kms are " + String.valueOf(CheckActivity.global_kms) + " kms."
 //                    );
                 } catch (NumberFormatException e) {/* Code here if necessary. */}
-                // Alert if global_kms == 0.
-                alert(CheckActivity.global_kms);
 
                 // Run the check.
                 // Prepare the message that will be displayed.

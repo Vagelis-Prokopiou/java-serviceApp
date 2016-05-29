@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         // Get the buttons.
         Button btn_check = (Button) findViewById(R.id.btn_check);
         Button btn_update = (Button) findViewById(R.id.btn_update);
+        Button btn_insert = (Button) findViewById(R.id.btn_insert);
         Button btn_available = (Button) findViewById(R.id.btn_available);
 
 
@@ -36,6 +37,15 @@ public class MainActivity extends AppCompatActivity {
                 // Launch the Update Activity.
                 Intent updateIntent = new Intent(MainActivity.this, UpdateActivity.class);
                 startActivity(updateIntent);
+            }
+        });
+
+        // Set a listener to btn_insert.
+        btn_insert.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                // Launch the Update Activity.
+                Intent insertIntent = new Intent(MainActivity.this, InsertActivity.class);
+                startActivity(insertIntent);
             }
         });
 

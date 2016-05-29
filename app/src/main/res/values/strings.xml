@@ -8,11 +8,13 @@
     <string name="done">Done</string>
     <string name="total_kms">Please, provide\nthe total kms of the vehicle below and press \"Proceed\".</string>
     <string name="results">Results</string>
-    <string name="title_activity_update">Update a data entry.</string>
+    <string name="title_activity_update">Update existing entry.</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_check">Run Inspection</string>
     <string name="vehicle_kms">Vehicle kms</string>
-    <string name="title_activity_available">Available data entries</string>
-    <string name="welcome_message">This app will help you manage your vehicle\'s periodic maintenance.\n To continue, select one of the options below.</string>
+    <string name="title_activity_available">Available entries</string>
+    <string name="welcome_message">This app will help you manage your vehicle\'s periodic maintenance.\nTo continue, select one of the options below.</string>
     <string name="thanks">Thank you for using ServiceApp</string>
+    <string name="insert_new_entry">Insert new entry</string>
+    <string name="title_activity_insert">Insert new entry</string>
 </resources>

@@ -34,7 +34,7 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/thanks"
                     android:id="@+id/textView_thanks"
-                    android:paddingBottom="20dp"
+                    android:paddingBottom="10dp"
                     android:textAlignment="center" />
 
                 <TextView
@@ -59,6 +59,14 @@
                     android:layout_below="@+id/scrollView_2"
                     android:layout_centerHorizontal="true"
                     android:text="@string/update_entry" />
+
+                <Button
+                    android:id="@+id/btn_insert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/scrollView_2"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/insert_new_entry" />
 
                 <Button
                     android:id="@+id/btn_available"
