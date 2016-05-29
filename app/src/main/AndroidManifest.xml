@@ -16,15 +16,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UpdateActivity"
-            android:label="@string/title_activity_update"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.github.vaggos.serviceapp.MainActivity" />
-        </activity>
-        <activity
             android:name=".CheckActivity"
             android:label="@string/title_activity_check"
             android:parentActivityName=".MainActivity"
@@ -45,6 +36,15 @@
         <activity
             android:name=".InsertActivity"
             android:label="@string/title_activity_insert"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.github.vaggos.serviceapp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".UpdateActivity"
+            android:label="@string/title_activity_update"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
