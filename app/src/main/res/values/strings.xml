@@ -17,4 +17,5 @@
     <string name="thanks">Thank you for using ServiceApp</string>
     <string name="insert_new_entry">Insert new entry</string>
     <string name="title_activity_insert">Insert new entry</string>
+    <string name="textview_update">Select the spare part, provide the data below, and press "Proceed".</string>
 </resources>
