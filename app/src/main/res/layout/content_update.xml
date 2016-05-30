@@ -64,7 +64,7 @@
                             android:inputType="number" />
 
                         <EditText
-                            android:id="@+id/editText_kms_update"
+                            android:id="@+id/editText_kms_changed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:ems="10"
