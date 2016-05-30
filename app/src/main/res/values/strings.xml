@@ -17,5 +17,10 @@
     <string name="thanks">Thank you for using ServiceApp</string>
     <string name="insert_new_entry">Insert new entry</string>
     <string name="title_activity_insert">Insert new entry</string>
-    <string name="textview_update">Select the spare part, provide the data below, and press "Proceed".</string>
+    <string name="textview_update">Select the spare part you wish to update, provide the data that you want to update, and press "Proceed".</string>
+    <string name="spare_part">Spare part</string>
+    <string name="kms_changed">Kms changed</string>
+    <string name="kms_interval">Kms interval</string>
+    <string name="date_changed">Date changed (Use ISO format: e.g. 2016-01-01)</string>
+    <string name="date_interval">Date interval (in months)</string>
 </resources>
