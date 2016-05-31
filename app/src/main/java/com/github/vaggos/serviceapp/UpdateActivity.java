@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.io.InputStream;
@@ -17,6 +18,7 @@ public class UpdateActivity extends AppCompatActivity {
     private static int selected_spare_part = -1;
     private static int kms_changed = -1;
     private static int kms_interval = -1;
+    private static String date_changed = null;
     private static int date_interval = -1;
 
 
@@ -38,8 +40,10 @@ public class UpdateActivity extends AppCompatActivity {
         final TextView editText_spare_part = (TextView) findViewById(R.id.editText_spare_part);
         final TextView editText_kms_changed = (TextView) findViewById(R.id.editText_kms_changed);
         final TextView editText_kms_interval = (TextView) findViewById(R.id.editText_kms_interval);
-        TextView editText_date_changed = (TextView) findViewById(R.id.editText_date_changed);
         final TextView editText_date_interval = (TextView) findViewById(R.id.editText_date_interval);
+
+        // Get the datepicker.
+        final DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
 
         // Get the Proceed button.
         Button btn_proceed_update = (Button) findViewById(R.id.btn_proceed_update);
@@ -94,7 +98,14 @@ public class UpdateActivity extends AppCompatActivity {
                     } catch (NumberFormatException e) {/* Code here if needed. */}
 
                     // Try to get the date_changed if it has been set.
-                    // Code here.
+                    try {
+                        int day = datePicker.getDayOfMonth();
+                        int month = datePicker.getMonth() + 1;
+                        int year = datePicker.getYear();
+                        // Create the ISO date that will be written to the csv file.
+                        UpdateActivity.date_changed = String.format("%02d", year) + "-" + String.format("%02d", month) + "-" + String.format("%02d", day);
+                        textView_results_update.setText(date_changed);
+                    } catch (NumberFormatException e) {/* Code here if needed. */}
 
                     // Try to get the date_interval if it has been set.
                     try {
@@ -108,11 +119,11 @@ public class UpdateActivity extends AppCompatActivity {
                     } catch (NumberFormatException e) {/* Code here if needed. */}
 
                     // If only the spare part has been provided, alert for more data.
-                    if (kms_changed == -1 && kms_interval == -1 && date_interval == -1) {
+                    if (kms_changed == -1) {
                         // Launch alert message.
                         new AlertDialog.Builder(UpdateActivity.this)
                                 .setTitle("Missing data")
-                                .setMessage("Only the spare part has been selected. Please. provide more data to continue.")
+                                .setMessage("Only the spare part and the date have been set. Please, provide at least the \"kms changed\" too.")
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {/*  Code here if needed. */}
                                 })

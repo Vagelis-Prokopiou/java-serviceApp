@@ -23,4 +23,5 @@
     <string name="kms_interval">Kms interval</string>
     <string name="date_changed">Date changed (Use ISO format: e.g. 2016-01-01)</string>
     <string name="date_interval">Date interval (in months)</string>
+    <string name="select_the_date">Select the date. Defaults to today.</string>
 </resources>
