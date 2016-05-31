@@ -131,6 +131,16 @@ public class UpdateActivity extends AppCompatActivity {
                                 .show();
                     } else {
                         // Todo: Write the csv.
+                        // Set the new values.
+                        dataList.get(selected_spare_part)[1] = date_changed;
+                        dataList.get(selected_spare_part)[3] = String.valueOf(kms_changed);
+                        if (date_interval != -1) {
+                            dataList.get(selected_spare_part)[2] = String.valueOf(date_interval);
+                        }
+                        if (kms_interval != -1) {
+                            dataList.get(selected_spare_part)[4] = String.valueOf(kms_interval);
+                        }
+                        // Todo: Write the csv.
                     }
                 } else {
                     // The selected_spare_part has not been set.
