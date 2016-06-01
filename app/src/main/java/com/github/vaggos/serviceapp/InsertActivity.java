@@ -1,5 +1,8 @@
 package com.github.vaggos.serviceapp;
 
+// Todo: Add check that all fields are provided.
+// Todo: Add check if a spare part already exists.
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
