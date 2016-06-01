@@ -21,6 +21,9 @@ public class UpdateActivity extends AppCompatActivity {
     private static String date_changed = null;
     private static int date_interval = -1;
 
+    // Create a database variable.
+    DatabaseHelper serviceDb;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,9 @@ public class UpdateActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Create a database instance.
+        serviceDb = new DatabaseHelper(this);
 
         // Read the data.cvs file.
         InputStream in = getResources().openRawResource(R.raw.data);

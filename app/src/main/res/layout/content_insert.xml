@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,4 +12,111 @@
     tools:context="com.github.vaggos.serviceapp.InsertActivity"
     tools:showIn="@layout/activity_insert">
 
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView_insert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentRight="false"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="false"
+                    android:paddingBottom="10dp"
+                    android:text="@string/textview_insert"
+                    android:textColor="#000000" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/scrollView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/editText_spare_part_insert"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="@string/spare_part" />
+
+                        <EditText
+                            android:id="@+id/editText_kms_changed_insert"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="@string/kms_changed"
+                            android:inputType="number"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp" />
+
+                        <EditText
+                            android:id="@+id/editText_kms_interval_insert"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="@string/kms_interval"
+                            android:inputType="number"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp" />
+
+                        <TextView
+                            android:id="@+id/textView_datepicker_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/select_the_date" />
+
+                        <DatePicker
+                            android:id="@+id/datePicker_insert"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:calendarViewShown="false"
+                            android:datePickerMode="spinner"
+                            android:spinnersShown="true" />
+
+                        <EditText
+                            android:id="@+id/editText_date_interval_insert"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="@string/date_interval"
+                            android:inputType="number"
+                            android:paddingBottom="10dp"
+                            android:paddingTop="10dp" />
+
+                        <Button
+                            android:id="@+id/btn_proceed_insert"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            android:text="@string/proceed" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+</LinearLayout>

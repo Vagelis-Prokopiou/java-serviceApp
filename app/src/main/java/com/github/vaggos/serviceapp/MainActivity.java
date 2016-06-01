@@ -3,12 +3,17 @@
 package com.github.vaggos.serviceapp;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    DatabaseHelper db = new DatabaseHelper(MainActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +57,30 @@ public class MainActivity extends AppCompatActivity {
         // Set a listener to btn_available.
         btn_available.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                // Launch the Update Activity.
-                Intent availableIntent = new Intent(MainActivity.this, AvailableActivity.class);
-                startActivity(availableIntent);
+                // Get all the data from the database.
+                Cursor result = db.getAllData();
+                // If there are no results, prepopulate the db.
+                if (result.getCount() == 0) {
+                    // No data; Pre-popuplate.
+                } else {
+                    // Build and show the results.
+                    StringBuffer buffer = new StringBuffer();
+                    while (result.moveToNext()) {
+                        buffer.append("Id: " + result.getString(0) + "\n");
+                        buffer.append("Spare part: " + result.getString(1) + "\n");
+                        buffer.append("Date changed: " + result.getString(2) + "\n");
+                        buffer.append("Date interval (in months): " + result.getString(3) + "\n");
+                        buffer.append("Kms changed: " + result.getString(4) + "\n");
+                        buffer.append("Kms interval: " + result.getString(5) + "\n\n");
+                    }
 
-
-                // Create a variable to hold all the values to be displayed.
-//                String message = "Results:\n";
-//                for (int i = 1; i < dataList.size(); i++) {
-//                    message = message + dataList.get(i)[0] + ": Last changed on " + dataList.get(i)[1] + ".\n";
-//                }
+                    // Show all the results.
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setCancelable(true);
+                    builder.setTitle("Available entries.");
+                    builder.setMessage(buffer.toString());
+                    builder.show();
+                }
             }
         });
     }
