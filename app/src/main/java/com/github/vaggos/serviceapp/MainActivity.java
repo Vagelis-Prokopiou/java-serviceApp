@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper db = new DatabaseHelper(MainActivity.this);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +26,26 @@ public class MainActivity extends AppCompatActivity {
         Button btn_update = (Button) findViewById(R.id.btn_update);
         Button btn_insert = (Button) findViewById(R.id.btn_insert);
         Button btn_available = (Button) findViewById(R.id.btn_available);
+
+        // Get all the data from the database.
+        Cursor result = db.getAllData();
+        // If there are no results, prepopulate the db.
+        if (result.getCount() == 0) {
+            // No data. Pre-populate.
+            db.insertData("Oil", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Oil filter", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Air filter", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Cabin air filter", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Spark plug", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Coolant", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Front brake pads", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Rear brake pads", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Timing belt", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Brake fluid", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Windshield wiper", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Transmission fluid", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Battery", "2012-01-01", 6, 5000, 3000);
+        }
 
 
         // Set a listener to btn_check.
@@ -62,6 +83,12 @@ public class MainActivity extends AppCompatActivity {
                 // If there are no results, prepopulate the db.
                 if (result.getCount() == 0) {
                     // No data; Pre-popuplate.
+                    // Show all the results.
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setCancelable(true);
+                    builder.setTitle("No data found.");
+                    builder.setMessage("No data found.");
+                    builder.show();
                 } else {
                     // Build and show the results.
                     StringBuffer buffer = new StringBuffer();
