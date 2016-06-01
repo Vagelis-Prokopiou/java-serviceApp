@@ -18,6 +18,7 @@
     <string name="insert_new_entry">Insert new entry</string>
     <string name="title_activity_insert">Insert new entry</string>
     <string name="textview_update">Select the spare part you wish to update, provide the data that you want to update, and press "Proceed".</string>
+    <string name="textview_insert">Provide the data below and press the "Proceed" button.</string>
     <string name="spare_part">Spare part</string>
     <string name="kms_changed">Kms changed</string>
     <string name="kms_interval">Kms interval</string>

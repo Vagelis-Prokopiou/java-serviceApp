@@ -22,7 +22,7 @@ public class UpdateActivity extends AppCompatActivity {
     private static int date_interval = -1;
 
     // Create a database variable.
-    DatabaseHelper myDb;
+    DatabaseHelper serviceDb;
 
 
     @Override
@@ -34,7 +34,7 @@ public class UpdateActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Create a database instance.
-        myDb = new DatabaseHelper(this);
+        serviceDb = new DatabaseHelper(this);
 
         // Read the data.cvs file.
         InputStream in = getResources().openRawResource(R.raw.data);
