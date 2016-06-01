@@ -17,8 +17,7 @@ public class InsertActivity extends AppCompatActivity {
     private static String spare_part, date_changed;
     private static int kms_changed, kms_interval, date_interval;
 
-    // Create a database variable.
-    // DatabaseHelper serviceDb; This initialization is wrong!!! Use the one below!!!
+    // Create a database variable/instance.
     DatabaseHelper serviceDb = new DatabaseHelper(InsertActivity.this);
 
     // Get the widgets.
@@ -89,12 +88,12 @@ public class InsertActivity extends AppCompatActivity {
                 } catch (NumberFormatException e) {/* Code here if needed. */}
 
                 // Message for testing.
-                String message = "spare part: " + spare_part + "\n" +
-                        "date_changed: " + date_changed + "\n" +
-                        "kms_changed: " + kms_changed + "\n" +
-                        "date_interval: " + date_interval + "\n" +
-                        "kms_interval: " + kms_interval;
-                Toast.makeText(InsertActivity.this, message, Toast.LENGTH_LONG).show();
+//                String message = "spare part: " + spare_part + "\n" +
+//                        "date_changed: " + date_changed + "\n" +
+//                        "kms_changed: " + kms_changed + "\n" +
+//                        "date_interval: " + date_interval + "\n" +
+//                        "kms_interval: " + kms_interval;
+//                Toast.makeText(InsertActivity.this, message, Toast.LENGTH_LONG).show();
 
 
                 // Call the method to insert the data.
