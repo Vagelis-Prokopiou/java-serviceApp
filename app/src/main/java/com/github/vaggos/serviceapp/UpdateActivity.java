@@ -1,6 +1,7 @@
 package com.github.vaggos.serviceapp;
 
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +11,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
-import java.io.InputStream;
-import java.util.List;
 
 public class UpdateActivity extends AppCompatActivity {
 
@@ -22,7 +21,7 @@ public class UpdateActivity extends AppCompatActivity {
     private static int date_interval = -1;
 
     // Create a database variable.
-    DatabaseHelper serviceDb;
+    DatabaseHelper serviceDb = new DatabaseHelper(UpdateActivity.this);
 
 
     @Override
@@ -33,13 +32,25 @@ public class UpdateActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Create a database instance.
-        serviceDb = new DatabaseHelper(this);
-
-        // Read the data.cvs file.
-        InputStream in = getResources().openRawResource(R.raw.data);
-        final ReadCSV csv = new ReadCSV(in);
-        final List<String[]> dataList = csv.read();
+        // Build the String Array with the db data.
+        Cursor cursor = serviceDb.getAllData();
+        final String[][] dataArray = new String[cursor.getCount()][5];
+        int j = 0;
+        while (cursor.moveToNext()) {
+            String id = cursor.getString(0);
+            String spare_part = cursor.getString(1);
+            String date_changed = cursor.getString(2);
+            String date_interval = cursor.getString(3);
+            String kms_changed = cursor.getString(4);
+            String kms_interval = cursor.getString(5);
+            // array[j][0] = id;
+            dataArray[j][0] = spare_part;
+            dataArray[j][1] = date_changed;
+            dataArray[j][2] = date_interval;
+            dataArray[j][3] = kms_changed;
+            dataArray[j][4] = kms_interval;
+            j++;
+        }
 
         // Get the text views.
         final TextView textView_results_update = (TextView) findViewById(R.id.textView_results_update);
@@ -56,10 +67,11 @@ public class UpdateActivity extends AppCompatActivity {
 
         // Prepare the message for the spare part selection.
         String message = "";
-        for (int i = 1; i < dataList.size(); i++) {
-            String name = dataList.get(i)[0];
+        for (int i = 1; i < dataArray.length; i++) {
+            String name = dataArray[i][0];
             message += "For " + name + " enter " + i + ".\n";
         }
+
         // Show the message.
         textView_results_update.setText(message);
 
@@ -71,7 +83,7 @@ public class UpdateActivity extends AppCompatActivity {
                     // Get the value of the spare part text field.
                     int spare_part = Integer.parseInt(editText_spare_part.getText().toString());
                     // Check if it is a valid spare part.
-                    if (spare_part > 0 && spare_part <= dataList.size()) {
+                    if (spare_part > 0 && spare_part <= dataArray.length) {
                         // Set the selected_spare_part variable.
                         UpdateActivity.selected_spare_part = spare_part;
                     }
@@ -138,13 +150,13 @@ public class UpdateActivity extends AppCompatActivity {
                     } else {
                         // Todo: Write the csv.
                         // Set the new values.
-                        dataList.get(selected_spare_part)[1] = date_changed;
-                        dataList.get(selected_spare_part)[3] = String.valueOf(kms_changed);
+                        dataArray[selected_spare_part][1] = date_changed;
+                        dataArray[selected_spare_part][3] = String.valueOf(kms_changed);
                         if (date_interval != -1) {
-                            dataList.get(selected_spare_part)[2] = String.valueOf(date_interval);
+                            dataArray[selected_spare_part][2] = String.valueOf(date_interval);
                         }
                         if (kms_interval != -1) {
-                            dataList.get(selected_spare_part)[4] = String.valueOf(kms_interval);
+                            dataArray[selected_spare_part][4] = String.valueOf(kms_interval);
                         }
                         // Todo: Write the csv.
                     }
@@ -158,7 +170,6 @@ public class UpdateActivity extends AppCompatActivity {
     }
 
     public void alert() {
-        // Launch alert message.
         new AlertDialog.Builder(UpdateActivity.this)
                 .setTitle("Selected spare part")
                 .setMessage("Please select a valid spare part to continue.")
@@ -168,5 +179,4 @@ public class UpdateActivity extends AppCompatActivity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
-
 }
