@@ -2,6 +2,7 @@ package com.github.vaggos.serviceapp;
 
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +11,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class UpdateActivity extends AppCompatActivity {
 
-    private static int selected_spare_part = -1;
+    private static int spare_part_id = -1;
     private static int kms_changed = -1;
     private static int kms_interval = -1;
     private static String date_changed = null;
@@ -22,7 +24,6 @@ public class UpdateActivity extends AppCompatActivity {
 
     // Create a database variable.
     DatabaseHelper serviceDb = new DatabaseHelper(UpdateActivity.this);
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +68,9 @@ public class UpdateActivity extends AppCompatActivity {
 
         // Prepare the message for the spare part selection.
         String message = "";
-        for (int i = 1; i < dataArray.length; i++) {
+        for (int i = 0; i < dataArray.length; i++) {
             String name = dataArray[i][0];
-            message += "For " + name + " enter " + i + ".\n";
+            message += "For " + name + ", enter " + (i + 1) + ".\n";
         }
 
         // Show the message.
@@ -84,14 +85,14 @@ public class UpdateActivity extends AppCompatActivity {
                     int spare_part = Integer.parseInt(editText_spare_part.getText().toString());
                     // Check if it is a valid spare part.
                     if (spare_part > 0 && spare_part <= dataArray.length) {
-                        // Set the selected_spare_part variable.
-                        UpdateActivity.selected_spare_part = spare_part;
+                        // Set the spare_part_id variable.
+                        UpdateActivity.spare_part_id = spare_part;
                     }
                 } catch (NumberFormatException e) {/* Code here if needed. */}
 
                 // Start the checks.
-                // First check is the selected_spare_part has been set.
-                if (UpdateActivity.selected_spare_part > 0) {
+                // First check is the spare_part_id has been set.
+                if (UpdateActivity.spare_part_id > 0) {
                     // Try to get the kms_changed if it has been set.
                     // If a value for the kms_changed has been provided execute try.
                     try {
@@ -99,7 +100,7 @@ public class UpdateActivity extends AppCompatActivity {
                         int kms_update = Integer.parseInt(editText_kms_changed.getText().toString());
                         // Check if it is a valid spare part.
                         if (kms_update > 0) {
-                            // Set the selected_spare_part variable.
+                            // Set the spare_part_id variable.
                             UpdateActivity.kms_changed = kms_update;
                         }
                     } catch (NumberFormatException e) {/* Code here if needed. */}
@@ -110,7 +111,7 @@ public class UpdateActivity extends AppCompatActivity {
                         int kms_interval = Integer.parseInt(editText_kms_interval.getText().toString());
                         // Check if it is a valid spare part.
                         if (kms_interval > 0) {
-                            // Set the selected_spare_part variable.
+                            // Set the spare_part_id variable.
                             UpdateActivity.kms_interval = kms_interval;
                         }
                     } catch (NumberFormatException e) {/* Code here if needed. */}
@@ -131,7 +132,7 @@ public class UpdateActivity extends AppCompatActivity {
                         int date_interval = Integer.parseInt(editText_date_interval.getText().toString());
                         // Check if it is a valid spare part.
                         if (date_interval > 0) {
-                            // Set the selected_spare_part variable.
+                            // Set the spare_part_id variable.
                             UpdateActivity.date_interval = date_interval;
                         }
                     } catch (NumberFormatException e) {/* Code here if needed. */}
@@ -148,20 +149,30 @@ public class UpdateActivity extends AppCompatActivity {
                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                 .show();
                     } else {
-                        // Todo: Write the csv.
+                        // Todo: Write the db.
+                        // Todo: Get the original values for this id, to use in the update operation (re-use the values that remain the same).
                         // Set the new values.
-                        dataArray[selected_spare_part][1] = date_changed;
-                        dataArray[selected_spare_part][3] = String.valueOf(kms_changed);
-                        if (date_interval != -1) {
-                            dataArray[selected_spare_part][2] = String.valueOf(date_interval);
+                        SQLiteDatabase db = serviceDb.getReadableDatabase();
+                        Cursor c = db.rawQuery("SELECT * FROM service_table WHERE ID = ?", new String[] {String.valueOf(spare_part_id)});
+                        String id = null;
+                        String spare_part = null;
+                        String date_changed = null;
+                        String date_interval = null;
+                        String kms_changed = null;
+                        String kms_interval = null;
+                        while(c.moveToNext()) {
+                            id = c.getString(0);
+                            spare_part = c.getString(1);
+                            date_changed = c.getString(2);
+                            date_interval = c.getString(3);
+                            kms_changed = c.getString(4);
+                            kms_interval = c.getString(5);
                         }
-                        if (kms_interval != -1) {
-                            dataArray[selected_spare_part][4] = String.valueOf(kms_interval);
-                        }
-                        // Todo: Write the csv.
+                        Toast.makeText(UpdateActivity.this, spare_part, Toast.LENGTH_LONG).show();
+
                     }
                 } else {
-                    // The selected_spare_part has not been set.
+                    // The spare_part_id has not been set.
                     // Show the popup warning message.
                     alert();
                 }

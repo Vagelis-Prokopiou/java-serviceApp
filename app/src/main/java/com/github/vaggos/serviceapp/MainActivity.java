@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
             db.insertData("Battery", "2012-01-01", 6, 5000, 3000);
         }
 
-
         // Set a listener to btn_check.
         btn_check.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
