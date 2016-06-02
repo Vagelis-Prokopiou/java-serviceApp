@@ -1,7 +1,5 @@
 package com.github.vaggos.serviceapp;
 
-// Todo: Add scrollview to CheckActivity.
-
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
