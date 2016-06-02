@@ -23,12 +23,12 @@ public class UpdateActivity extends AppCompatActivity {
     private static int date_interval = -1;
 
     // To be used with the data retrieved from the sql query.
-    String original_id = null;
-    String original_spare_part = null;
-    String original_date_changed = null;
-    String original_date_interval = null;
-    String original_kms_changed = null;
-    String original_kms_interval = null;
+    private static String original_id = null;
+    private static String original_spare_part = null;
+    private static String original_date_changed = null;
+    private static String original_date_interval = null;
+    private static String original_kms_changed = null;
+    private static String original_kms_interval = null;
 
     // Create a database variable.
     DatabaseHelper serviceDb = new DatabaseHelper(UpdateActivity.this);
@@ -144,45 +144,67 @@ public class UpdateActivity extends AppCompatActivity {
                         }
                     } catch (NumberFormatException e) {/* Code here if needed. */}
 
-                    // If only the spare part has been provided, alert for more data.
+                    // Get the original values.
+                    SQLiteDatabase db = serviceDb.getReadableDatabase();
+                    Cursor c = db.rawQuery("SELECT * FROM service_table WHERE ID = ?", new String[]{String.valueOf(spare_part_id)});
+                    while (c.moveToNext()) {
+                        original_id = c.getString(0);
+                        original_spare_part = c.getString(1);
+                        original_date_changed = c.getString(2);
+                        original_date_interval = c.getString(3);
+                        original_kms_changed = c.getString(4);
+                        original_kms_interval = c.getString(5);
+                    }
+
+                    // If the kms_changed has not been provided, alert for more data.
                     if (kms_changed == -1) {
                         // Launch alert message.
-                        new AlertDialog.Builder(UpdateActivity.this)
-                                .setTitle("Missing data")
-                                .setMessage("Only the spare part and the date have been set. Please, provide at least the \"kms changed\" too.")
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {/*  Code here if needed. */}
-                                })
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .show();
-                    } else {
-                        // Todo: Write the db.
-                        // Set the new values.
-                        SQLiteDatabase db = serviceDb.getReadableDatabase();
-                        Cursor c = db.rawQuery("SELECT * FROM service_table WHERE ID = ?", new String[] {String.valueOf(spare_part_id)});
-                        while(c.moveToNext()) {
-                            original_id = c.getString(0);
-                            original_spare_part = c.getString(1);
-                            original_date_changed = c.getString(2);
-                            original_date_interval = c.getString(3);
-                            original_kms_changed = c.getString(4);
-                            original_kms_interval = c.getString(5);
+                        alert("Missing data", "Please, provide the \"kms changed\" too.");
+                    } else if (kms_changed < 1000) {
+                        alert("Are you sure?", "The provided kms are very few. Is this a new vehicle?");
+                    } else if (kms_changed >= 1000 && kms_interval == -1 && date_interval == -1) {
+                        boolean isUpdated = serviceDb.updateData(original_id, original_spare_part, date_changed, Integer.parseInt(original_date_interval), kms_changed, Integer.parseInt(original_kms_interval));
+                        if (isUpdated) {
+                            Toast.makeText(UpdateActivity.this, "Data successfully updated.", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(UpdateActivity.this, "Data failed to update.", Toast.LENGTH_LONG).show();
                         }
-                        Toast.makeText(UpdateActivity.this, original_spare_part, Toast.LENGTH_LONG).show();
+                    } else if (kms_changed >= 1000 && date_interval != -1 && kms_interval == -1) {
+                        boolean isUpdated = serviceDb.updateData(original_id, original_spare_part, date_changed, date_interval, kms_changed, Integer.parseInt(original_kms_interval));
+                        if (isUpdated) {
+                            Toast.makeText(UpdateActivity.this, "Data successfully updated.", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(UpdateActivity.this, "Data failed to update.", Toast.LENGTH_LONG).show();
+                        }
+                    } else if (kms_changed >= 1000 && date_interval == -1 && kms_interval != -1) {
+                        boolean isUpdated = serviceDb.updateData(original_id, original_spare_part, date_changed, Integer.parseInt(original_date_interval), kms_changed, kms_interval);
+                        if (isUpdated) {
+                            Toast.makeText(UpdateActivity.this, "Data successfully updated.", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(UpdateActivity.this, "Data failed to update.", Toast.LENGTH_LONG).show();
+                        }
+                    } else if (kms_changed >= 1000 && date_interval != -1 && kms_interval != -1) {
+                        // All data has been provided.
+                        boolean isUpdated = serviceDb.updateData(original_id, original_spare_part, date_changed, date_interval, kms_changed, kms_interval);
+                        if (isUpdated) {
+                            Toast.makeText(UpdateActivity.this, "Data successfully updated.", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(UpdateActivity.this, "Data failed to update.", Toast.LENGTH_LONG).show();
+                        }
                     }
                 } else {
                     // The spare_part_id has not been set.
                     // Show the popup warning message.
-                    alert();
+                    alert("Selected spare part", "Please select a valid spare part to continue.");
                 }
             }
         });
     }
 
-    public void alert() {
+    public void alert(String title, String message) {
         new AlertDialog.Builder(UpdateActivity.this)
-                .setTitle("Selected spare part")
-                .setMessage("Please select a valid spare part to continue.")
+                .setTitle(title)
+                .setMessage(message)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {/*  Code here if needed. */}
                 })
