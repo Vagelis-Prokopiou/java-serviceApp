@@ -83,13 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 Cursor result = db.getAllData();
                 // If there are no results, prepopulate the db.
                 if (result.getCount() == 0) {
-                    // No data; Pre-popuplate.
-                    // Show all the results.
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setCancelable(true);
-                    builder.setTitle("No data found.");
-                    builder.setMessage("No data found.");
-                    builder.show();
+                    // This must never be valid since the db is prepopulated.
                 } else {
                     // Build and show the results.
                     StringBuffer buffer = new StringBuffer();
