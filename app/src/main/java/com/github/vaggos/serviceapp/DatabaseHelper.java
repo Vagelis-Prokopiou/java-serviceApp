@@ -16,9 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_5 = "KMS_CHANGED";
     public static final String COL_6 = "KMS_INTERVAL";
 
-
     public DatabaseHelper(Context context) {
-//        super(context, name, factory, version);
         super(context, DATABASE_NAME, null, 1);
     }
 
