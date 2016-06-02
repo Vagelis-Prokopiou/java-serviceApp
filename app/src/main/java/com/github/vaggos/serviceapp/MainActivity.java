@@ -1,6 +1,7 @@
+package com.github.vaggos.serviceapp;
+
 // Todo: Add scrollview to available activity.
 // Todo: Add scrollview to check activity.
-package com.github.vaggos.serviceapp;
 
 import android.content.Intent;
 import android.database.Cursor;
