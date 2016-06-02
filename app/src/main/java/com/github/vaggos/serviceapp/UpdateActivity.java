@@ -123,7 +123,6 @@ public class UpdateActivity extends AppCompatActivity {
                         int year = datePicker.getYear();
                         // Create the ISO date that will be written to the csv file.
                         UpdateActivity.date_changed = String.format("%02d", year) + "-" + String.format("%02d", month) + "-" + String.format("%02d", day);
-                        textView_results_update.setText(date_changed);
                     } catch (NumberFormatException e) {/* Code here if needed. */}
 
                     // Try to get the date_interval if it has been set.
@@ -154,21 +153,21 @@ public class UpdateActivity extends AppCompatActivity {
                         // Set the new values.
                         SQLiteDatabase db = serviceDb.getReadableDatabase();
                         Cursor c = db.rawQuery("SELECT * FROM service_table WHERE ID = ?", new String[] {String.valueOf(spare_part_id)});
-                        String id = null;
-                        String spare_part = null;
-                        String date_changed = null;
-                        String date_interval = null;
-                        String kms_changed = null;
-                        String kms_interval = null;
+                        String original_id = null;
+                        String original_spare_part = null;
+                        String original_date_changed = null;
+                        String original_date_interval = null;
+                        String original_kms_changed = null;
+                        String original_kms_interval = null;
                         while(c.moveToNext()) {
-                            id = c.getString(0);
-                            spare_part = c.getString(1);
-                            date_changed = c.getString(2);
-                            date_interval = c.getString(3);
-                            kms_changed = c.getString(4);
-                            kms_interval = c.getString(5);
+                            original_id = c.getString(0);
+                            original_spare_part = c.getString(1);
+                            original_date_changed = c.getString(2);
+                            original_date_interval = c.getString(3);
+                            original_kms_changed = c.getString(4);
+                            original_kms_interval = c.getString(5);
                         }
-                        Toast.makeText(UpdateActivity.this, spare_part, Toast.LENGTH_LONG).show();
+                        Toast.makeText(UpdateActivity.this, original_spare_part, Toast.LENGTH_LONG).show();
 
                     }
                 } else {
