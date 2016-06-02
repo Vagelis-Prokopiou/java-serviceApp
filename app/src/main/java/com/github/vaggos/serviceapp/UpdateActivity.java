@@ -22,6 +22,14 @@ public class UpdateActivity extends AppCompatActivity {
     private static String date_changed = null;
     private static int date_interval = -1;
 
+    // To be used with the data retrieved from the sql query.
+    String original_id = null;
+    String original_spare_part = null;
+    String original_date_changed = null;
+    String original_date_interval = null;
+    String original_kms_changed = null;
+    String original_kms_interval = null;
+
     // Create a database variable.
     DatabaseHelper serviceDb = new DatabaseHelper(UpdateActivity.this);
 
@@ -149,16 +157,9 @@ public class UpdateActivity extends AppCompatActivity {
                                 .show();
                     } else {
                         // Todo: Write the db.
-                        // Todo: Get the original values for this id, to use in the update operation (re-use the values that remain the same).
                         // Set the new values.
                         SQLiteDatabase db = serviceDb.getReadableDatabase();
                         Cursor c = db.rawQuery("SELECT * FROM service_table WHERE ID = ?", new String[] {String.valueOf(spare_part_id)});
-                        String original_id = null;
-                        String original_spare_part = null;
-                        String original_date_changed = null;
-                        String original_date_interval = null;
-                        String original_kms_changed = null;
-                        String original_kms_interval = null;
                         while(c.moveToNext()) {
                             original_id = c.getString(0);
                             original_spare_part = c.getString(1);
@@ -168,7 +169,6 @@ public class UpdateActivity extends AppCompatActivity {
                             original_kms_interval = c.getString(5);
                         }
                         Toast.makeText(UpdateActivity.this, original_spare_part, Toast.LENGTH_LONG).show();
-
                     }
                 } else {
                     // The spare_part_id has not been set.
