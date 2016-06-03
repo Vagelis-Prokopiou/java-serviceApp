@@ -42,6 +42,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.github.vaggos.serviceapp.MainActivity" />
         </activity>
+        <activity
+            android:name=".DeleteActivity"
+            android:label="@string/title_activity_delete"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.github.vaggos.serviceapp.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

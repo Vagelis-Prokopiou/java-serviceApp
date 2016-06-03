@@ -76,10 +76,9 @@ public class MainActivity extends AppCompatActivity {
         // Set a listener to btn_delete.
         btn_delete.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                // Launch the DeleteActivity.
-//                Intent insertIntent = new Intent(MainActivity.this, InsertActivity.class);
-//                startActivity(insertIntent);
-                Toast.makeText(getApplicationContext(),"Delete was pressed",Toast.LENGTH_LONG).show();
+                // Launch the Delete Activity.
+                Intent deleteIntent = new Intent(MainActivity.this, DeleteActivity.class);
+                startActivity(deleteIntent);
             }
         });
 
