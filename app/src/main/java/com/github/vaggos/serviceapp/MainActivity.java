@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Button btn_update = (Button) findViewById(R.id.btn_update);
         Button btn_insert = (Button) findViewById(R.id.btn_insert);
         Button btn_available = (Button) findViewById(R.id.btn_available);
+        Button btn_delete = (Button) findViewById(R.id.btn_delete);
 
         // Get all the data from the database.
         Cursor result = db.getAllData();
@@ -68,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
                 // Launch the Update Activity.
                 Intent insertIntent = new Intent(MainActivity.this, InsertActivity.class);
                 startActivity(insertIntent);
+            }
+        });
+
+        // Set a listener to btn_delete.
+        btn_delete.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                // Launch the DeleteActivity.
+//                Intent insertIntent = new Intent(MainActivity.this, InsertActivity.class);
+//                startActivity(insertIntent);
+                Toast.makeText(getApplicationContext(),"Delete was pressed",Toast.LENGTH_LONG).show();
             }
         });
 
