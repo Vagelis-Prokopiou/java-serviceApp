@@ -13,6 +13,9 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
 
 public class UpdateActivity extends AppCompatActivity {
 
@@ -21,6 +24,7 @@ public class UpdateActivity extends AppCompatActivity {
     private static int kms_interval = -1;
     private static String date_changed = null;
     private static int date_interval = -1;
+    public boolean valid_spare_part = false;
 
     // To be used with the data retrieved from the sql query.
     private static String original_id = null;
@@ -43,7 +47,7 @@ public class UpdateActivity extends AppCompatActivity {
 
         // Build the String Array with the db data.
         Cursor cursor = serviceDb.getAllData();
-        final String[][] dataArray = new String[cursor.getCount()][5];
+        final String[][] dataArray = new String[cursor.getCount()][6];
         int j = 0;
         while (cursor.moveToNext()) {
             String id = cursor.getString(0);
@@ -52,12 +56,12 @@ public class UpdateActivity extends AppCompatActivity {
             String date_interval = cursor.getString(3);
             String kms_changed = cursor.getString(4);
             String kms_interval = cursor.getString(5);
-            // array[j][0] = id;
             dataArray[j][0] = spare_part;
             dataArray[j][1] = date_changed;
             dataArray[j][2] = date_interval;
             dataArray[j][3] = kms_changed;
             dataArray[j][4] = kms_interval;
+            dataArray[j][5] = id;
             j++;
         }
 
@@ -78,7 +82,8 @@ public class UpdateActivity extends AppCompatActivity {
         String message = "";
         for (int i = 0; i < dataArray.length; i++) {
             String name = dataArray[i][0];
-            message += "For " + name + ", enter " + (i + 1) + ".\n";
+            String id = dataArray[i][5];
+            message += "For " + name + ", enter " + id + ".\n";
         }
 
         // Show the message.
@@ -91,8 +96,15 @@ public class UpdateActivity extends AppCompatActivity {
                 try {
                     // Get the value of the spare part text field.
                     int spare_part = Integer.parseInt(editText_spare_part.getText().toString());
-                    // Check if it is a valid spare part.
-                    if (spare_part > 0 && spare_part <= dataArray.length) {
+                    // Check if it is a valid spare part (if it can be found in the values in the DataArray).
+                    for (int i = 0; i < dataArray.length; i++) {
+                        if (String.valueOf(spare_part).equals(dataArray[i][5])) {
+                            // If it can be found, set the valid_spare_part variable (used for checking below).
+                            valid_spare_part = true;
+                            break;
+                        }
+                    }
+                    if (spare_part > 0 && valid_spare_part) {
                         // Set the spare_part_id variable.
                         UpdateActivity.spare_part_id = spare_part;
                     }
