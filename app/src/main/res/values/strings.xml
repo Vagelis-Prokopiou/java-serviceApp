@@ -6,7 +6,7 @@
     <string name="insert_entry">Insert entry</string>
     <string name="available_entries">Available entries</string>
     <string name="done">Done</string>
-    <string name="total_kms">Please, provide\nthe total kms of the vehicle in the input above, and press \"Proceed\".</string>
+    <string name="total_kms">Please, provide the total kms of the vehicle in the input below, and press \"Proceed\".</string>
     <string name="results">Results</string>
     <string name="title_activity_update">Update existing entry.</string>
     <string name="action_settings">Settings</string>
