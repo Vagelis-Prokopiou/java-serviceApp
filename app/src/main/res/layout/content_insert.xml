@@ -36,7 +36,8 @@
                     android:layout_alignParentTop="false"
                     android:paddingBottom="10dp"
                     android:text="@string/textview_insert"
-                    android:textColor="#000000" />
+                    android:textSize="16sp"
+                    android:textColor="#000" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -52,40 +53,49 @@
 
                         <EditText
                             android:id="@+id/editText_spare_part_insert"
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:hint="@string/spare_part" />
+                            android:hint="@string/spare_part"
+                            android:textSize="14sp"
+                            android:textColorHint="#000"/>
 
                         <EditText
                             android:id="@+id/editText_kms_changed_insert"
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:hint="@string/kms_changed"
                             android:inputType="number"
                             android:paddingBottom="10dp"
-                            android:paddingTop="10dp" />
+                            android:paddingTop="10dp"
+                            android:textSize="14sp"
+                            android:textColorHint="#000"/>
 
                         <EditText
                             android:id="@+id/editText_kms_interval_insert"
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:hint="@string/kms_interval"
                             android:inputType="number"
                             android:paddingBottom="10dp"
-                            android:paddingTop="10dp" />
+                            android:paddingTop="10dp"
+                            android:textSize="14sp"
+                            android:textColorHint="#000"/>
 
                         <TextView
                             android:id="@+id/textView_datepicker_label"
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/select_the_date" />
+                            android:text="@string/select_the_date"
+                            android:paddingBottom="10dp"
+                            android:textSize="14sp"
+                            android:textColor="#000"/>
 
                         <DatePicker
                             android:id="@+id/datePicker_insert"
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:calendarViewShown="false"
                             android:datePickerMode="spinner"
@@ -93,13 +103,15 @@
 
                         <EditText
                             android:id="@+id/editText_date_interval_insert"
-                            android:layout_width="wrap_content"
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:hint="@string/date_interval"
                             android:inputType="number"
                             android:paddingBottom="10dp"
-                            android:paddingTop="10dp" />
+                            android:paddingTop="10dp"
+                            android:textSize="14sp"
+                            android:textColorHint="#000"/>
 
                         <Button
                             android:id="@+id/btn_proceed_insert"
