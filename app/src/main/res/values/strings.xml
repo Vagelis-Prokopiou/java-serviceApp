@@ -32,7 +32,7 @@
     <string name="title_activity_about">About this app</string>
     <string name="serviceapp">ServiceApp</string>
     <string name="about_body">Thank you for using ServiceApp.\n\nThis app intends to help you simplify and automate the periodic maintenance of your vehicle.\n\nThe app was designed to be simple, easy and straightforward.
-        It comes with a prepopulated database of the most common spare parts.
-        You can easily add or remove entries, to suit your specific needs.\n\nFor suggestions or bugs, please visit the project\'s Github url:\n<a href='https://github.com/Vaggos/ServiceApp_Android/' target='_blank'>https://github.com/Vaggos/ServiceApp_Android/</a>\n\nFor questions or anything else, you can email me at the email provided below.\n\nAuthor: Vagelis Prokopiou.\nEmail: <a href="mailto:drz4007@gmail.com">drz4007@gmail.com</a>
+        It comes with a pre-populated database of the most common spare parts.
+        You can easily add or remove entries, to suit your specific needs.\n\nFor suggestions or bugs, please visit the project\'s Github url:\n<a href='https://github.com/Vaggos/ServiceApp_Android/' target='_blank'>https://github.com/Vaggos/ServiceApp_Android/</a>\n\nFor questions or anything else, you can email me at the email provided below.\n\nIf you find this app useful, consider taking a quick read of the \"Donate\" portion of the app, by clicking the \"Donate\" button below.\n\nAuthor: Vagelis Prokopiou.\nEmail: <a href="mailto:drz4007@gmail.com">drz4007@gmail.com</a>
     </string>
 </resources>
