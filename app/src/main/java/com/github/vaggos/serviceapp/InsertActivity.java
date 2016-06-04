@@ -90,15 +90,6 @@ public class InsertActivity extends AppCompatActivity {
                     InsertActivity.date_interval = Integer.parseInt(editText_date_interval_insert.getText().toString());
                 } catch (NumberFormatException e) {/* Code here if needed. */}
 
-                // Message for testing.
-//                String message = "spare part: " + spare_part + "\n" +
-//                        "date_changed: " + date_changed + "\n" +
-//                        "kms_changed: " + kms_changed + "\n" +
-//                        "date_interval: " + date_interval + "\n" +
-//                        "kms_interval: " + kms_interval;
-//                Toast.makeText(InsertActivity.this, message, Toast.LENGTH_LONG).show();
-
-
                 // Call the method to insert the data.
                 boolean isInserted = serviceDb.insertData(spare_part, date_changed, date_interval, kms_changed, kms_interval);
                 if (isInserted) {
