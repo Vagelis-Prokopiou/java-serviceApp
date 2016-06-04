@@ -13,18 +13,15 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Arrays;
-import java.util.StringTokenizer;
-
 
 public class UpdateActivity extends AppCompatActivity {
 
+    private static String spare_part = null;
     private static int spare_part_id = -1;
     private static int kms_changed = -1;
     private static int kms_interval = -1;
     private static String date_changed = null;
     private static int date_interval = -1;
-    public boolean valid_spare_part = false;
 
     // To be used with the data retrieved from the sql query.
     private static String original_id = null;
@@ -82,135 +79,131 @@ public class UpdateActivity extends AppCompatActivity {
         String message = "";
         for (int i = 0; i < dataArray.length; i++) {
             String name = dataArray[i][0];
-            String id = dataArray[i][5];
-            message += "For " + name + ", enter " + id + ".\n";
+            message += "For " + name + ", enter " + (i + 1) + ".\n";
         }
 
         // Show the message.
         textView_results_update.setText(message);
 
         // Set listener on Proceed button.
-        btn_proceed_update.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                // If a value for the spare part has been provided execute try.
-                try {
-                    // Get the value of the spare part text field.
-                    int spare_part = Integer.parseInt(editText_spare_part.getText().toString());
-                    // Check if it is a valid spare part (if it can be found in the values in the DataArray).
-                    for (int i = 0; i < dataArray.length; i++) {
-                        if (String.valueOf(spare_part).equals(dataArray[i][5])) {
-                            // If it can be found, set the valid_spare_part variable (used for checking below).
-                            valid_spare_part = true;
-                            break;
+        btn_proceed_update.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // If a value for the spare part has been provided execute try.
+                        try {
+                            // Get the value of the spare part text field.
+                            int array_index = Integer.parseInt(editText_spare_part.getText().toString());
+                            // Check if it is a valid spare part.
+                            if (array_index > 0 && array_index <= dataArray.length) {
+                                // Set the spare_part_id variable.
+                                UpdateActivity.spare_part_id = Integer.parseInt(dataArray[array_index - 1][5]);
+                                UpdateActivity.spare_part = dataArray[array_index - 1][0];
+                            }
+                        } catch (NumberFormatException e) {/* Code here if needed. */}
+
+                        // Start the checks.
+                        // First check is the spare_part_id has been set.
+                        if (UpdateActivity.spare_part_id > 0) {
+                            // Try to get the kms_changed if it has been set.
+                            // If a value for the kms_changed has been provided execute try.
+                            try {
+                                // Get the value of the text field.
+                                int kms_update = Integer.parseInt(editText_kms_changed.getText().toString());
+                                // Check if it is a valid spare part.
+                                if (kms_update > 0) {
+                                    // Set the spare_part_id variable.
+                                    UpdateActivity.kms_changed = kms_update;
+                                }
+                            } catch (NumberFormatException e) {/* Code here if needed. */}
+
+                            // Try to get the kms_interval if it has been set.
+                            try {
+                                // Get the value of the text field.
+                                int kms_interval = Integer.parseInt(editText_kms_interval.getText().toString());
+                                // Check if it is a valid spare part.
+                                if (kms_interval > 0) {
+                                    // Set the spare_part_id variable.
+                                    UpdateActivity.kms_interval = kms_interval;
+                                }
+                            } catch (NumberFormatException e) {/* Code here if needed. */}
+
+                            // Try to get the date_changed if it has been set.
+                            try {
+                                int day = datePicker.getDayOfMonth();
+                                int month = datePicker.getMonth() + 1;
+                                int year = datePicker.getYear();
+                                // Create the ISO date that will be written to the csv file.
+                                UpdateActivity.date_changed = String.format("%02d", year) + "-" + String.format("%02d", month) + "-" + String.format("%02d", day);
+                            } catch (NumberFormatException e) {/* Code here if needed. */}
+
+                            // Try to get the date_interval if it has been set.
+                            try {
+                                // Get the value of the text field.
+                                int date_interval = Integer.parseInt(editText_date_interval.getText().toString());
+                                // Check if it is a valid spare part.
+                                if (date_interval > 0) {
+                                    // Set the spare_part_id variable.
+                                    UpdateActivity.date_interval = date_interval;
+                                }
+                            } catch (NumberFormatException e) {/* Code here if needed. */}
+
+                            // Get the original values.
+                            SQLiteDatabase db = serviceDb.getReadableDatabase();
+                            Cursor c = db.rawQuery("SELECT * FROM service_table WHERE ID = ?", new String[]{String.valueOf(spare_part_id)});
+                            while (c.moveToNext()) {
+                                original_id = c.getString(0);
+                                original_spare_part = c.getString(1);
+                                original_date_changed = c.getString(2);
+                                original_date_interval = c.getString(3);
+                                original_kms_changed = c.getString(4);
+                                original_kms_interval = c.getString(5);
+                            }
+
+                            // If the kms_changed has not been provided, alert for more data.
+                            if (kms_changed == -1) {
+                                // Launch alert message.
+                                alert("Missing data", "Please, provide the \"kms changed\" too.");
+                            } else if (kms_changed < 1000) {
+                                alert("Are you sure?", "The provided kms are very few. Is this a new vehicle?");
+                            } else if (kms_changed >= 1000 && kms_interval == -1 && date_interval == -1) {
+                                boolean isUpdated = serviceDb.updateData(original_id, original_spare_part, date_changed, Integer.parseInt(original_date_interval), kms_changed, Integer.parseInt(original_kms_interval));
+                                if (isUpdated) {
+                                    Toast.makeText(UpdateActivity.this, UpdateActivity.spare_part + " successfully updated.", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(UpdateActivity.this, UpdateActivity.spare_part + " failed to update.", Toast.LENGTH_LONG).show();
+                                }
+                            } else if (kms_changed >= 1000 && date_interval != -1 && kms_interval == -1) {
+                                boolean isUpdated = serviceDb.updateData(original_id, original_spare_part, date_changed, date_interval, kms_changed, Integer.parseInt(original_kms_interval));
+                                if (isUpdated) {
+                                    Toast.makeText(UpdateActivity.this, UpdateActivity.spare_part + " successfully updated.", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(UpdateActivity.this, UpdateActivity.spare_part + " failed to update.", Toast.LENGTH_LONG).show();
+                                }
+                            } else if (kms_changed >= 1000 && date_interval == -1 && kms_interval != -1) {
+                                boolean isUpdated = serviceDb.updateData(original_id, original_spare_part, date_changed, Integer.parseInt(original_date_interval), kms_changed, kms_interval);
+                                if (isUpdated) {
+                                    Toast.makeText(UpdateActivity.this, UpdateActivity.spare_part + " successfully updated.", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(UpdateActivity.this, UpdateActivity.spare_part + " failed to update.", Toast.LENGTH_LONG).show();
+                                }
+                            } else if (kms_changed >= 1000 && date_interval != -1 && kms_interval != -1) {
+                                // All data has been provided.
+                                boolean isUpdated = serviceDb.updateData(original_id, original_spare_part, date_changed, date_interval, kms_changed, kms_interval);
+                                if (isUpdated) {
+                                    Toast.makeText(UpdateActivity.this, UpdateActivity.spare_part + " successfully updated.", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(UpdateActivity.this, UpdateActivity.spare_part + " failed to update.", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        } else {
+                            // The spare_part_id has not been set.
+                            // Show the popup warning message.
+                            alert("Selected spare part", "Please select a valid spare part to continue.");
                         }
                     }
-                    if (spare_part > 0 && valid_spare_part) {
-                        // Set the spare_part_id variable.
-                        UpdateActivity.spare_part_id = spare_part;
-                    }
-                } catch (NumberFormatException e) {/* Code here if needed. */}
-
-                // Start the checks.
-                // First check is the spare_part_id has been set.
-                if (UpdateActivity.spare_part_id > 0) {
-                    // Try to get the kms_changed if it has been set.
-                    // If a value for the kms_changed has been provided execute try.
-                    try {
-                        // Get the value of the text field.
-                        int kms_update = Integer.parseInt(editText_kms_changed.getText().toString());
-                        // Check if it is a valid spare part.
-                        if (kms_update > 0) {
-                            // Set the spare_part_id variable.
-                            UpdateActivity.kms_changed = kms_update;
-                        }
-                    } catch (NumberFormatException e) {/* Code here if needed. */}
-
-                    // Try to get the kms_interval if it has been set.
-                    try {
-                        // Get the value of the text field.
-                        int kms_interval = Integer.parseInt(editText_kms_interval.getText().toString());
-                        // Check if it is a valid spare part.
-                        if (kms_interval > 0) {
-                            // Set the spare_part_id variable.
-                            UpdateActivity.kms_interval = kms_interval;
-                        }
-                    } catch (NumberFormatException e) {/* Code here if needed. */}
-
-                    // Try to get the date_changed if it has been set.
-                    try {
-                        int day = datePicker.getDayOfMonth();
-                        int month = datePicker.getMonth() + 1;
-                        int year = datePicker.getYear();
-                        // Create the ISO date that will be written to the csv file.
-                        UpdateActivity.date_changed = String.format("%02d", year) + "-" + String.format("%02d", month) + "-" + String.format("%02d", day);
-                    } catch (NumberFormatException e) {/* Code here if needed. */}
-
-                    // Try to get the date_interval if it has been set.
-                    try {
-                        // Get the value of the text field.
-                        int date_interval = Integer.parseInt(editText_date_interval.getText().toString());
-                        // Check if it is a valid spare part.
-                        if (date_interval > 0) {
-                            // Set the spare_part_id variable.
-                            UpdateActivity.date_interval = date_interval;
-                        }
-                    } catch (NumberFormatException e) {/* Code here if needed. */}
-
-                    // Get the original values.
-                    SQLiteDatabase db = serviceDb.getReadableDatabase();
-                    Cursor c = db.rawQuery("SELECT * FROM service_table WHERE ID = ?", new String[]{String.valueOf(spare_part_id)});
-                    while (c.moveToNext()) {
-                        original_id = c.getString(0);
-                        original_spare_part = c.getString(1);
-                        original_date_changed = c.getString(2);
-                        original_date_interval = c.getString(3);
-                        original_kms_changed = c.getString(4);
-                        original_kms_interval = c.getString(5);
-                    }
-
-                    // If the kms_changed has not been provided, alert for more data.
-                    if (kms_changed == -1) {
-                        // Launch alert message.
-                        alert("Missing data", "Please, provide the \"kms changed\" too.");
-                    } else if (kms_changed < 1000) {
-                        alert("Are you sure?", "The provided kms are very few. Is this a new vehicle?");
-                    } else if (kms_changed >= 1000 && kms_interval == -1 && date_interval == -1) {
-                        boolean isUpdated = serviceDb.updateData(original_id, original_spare_part, date_changed, Integer.parseInt(original_date_interval), kms_changed, Integer.parseInt(original_kms_interval));
-                        if (isUpdated) {
-                            Toast.makeText(UpdateActivity.this, "Data successfully updated.", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(UpdateActivity.this, "Data failed to update.", Toast.LENGTH_LONG).show();
-                        }
-                    } else if (kms_changed >= 1000 && date_interval != -1 && kms_interval == -1) {
-                        boolean isUpdated = serviceDb.updateData(original_id, original_spare_part, date_changed, date_interval, kms_changed, Integer.parseInt(original_kms_interval));
-                        if (isUpdated) {
-                            Toast.makeText(UpdateActivity.this, "Data successfully updated.", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(UpdateActivity.this, "Data failed to update.", Toast.LENGTH_LONG).show();
-                        }
-                    } else if (kms_changed >= 1000 && date_interval == -1 && kms_interval != -1) {
-                        boolean isUpdated = serviceDb.updateData(original_id, original_spare_part, date_changed, Integer.parseInt(original_date_interval), kms_changed, kms_interval);
-                        if (isUpdated) {
-                            Toast.makeText(UpdateActivity.this, "Data successfully updated.", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(UpdateActivity.this, "Data failed to update.", Toast.LENGTH_LONG).show();
-                        }
-                    } else if (kms_changed >= 1000 && date_interval != -1 && kms_interval != -1) {
-                        // All data has been provided.
-                        boolean isUpdated = serviceDb.updateData(original_id, original_spare_part, date_changed, date_interval, kms_changed, kms_interval);
-                        if (isUpdated) {
-                            Toast.makeText(UpdateActivity.this, "Data successfully updated.", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(UpdateActivity.this, "Data failed to update.", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                } else {
-                    // The spare_part_id has not been set.
-                    // Show the popup warning message.
-                    alert("Selected spare part", "Please select a valid spare part to continue.");
                 }
-            }
-        });
+        );
     }
 
     public void alert(String title, String message) {
