@@ -94,6 +94,14 @@
                     android:layout_centerHorizontal="true"
                     android:text="@string/about" />
 
+                <Button
+                    android:id="@+id/btn_donate"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_below="@+id/scrollView_2"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/title_activity_donate" />
+
             </LinearLayout>
         </ScrollView>
 
