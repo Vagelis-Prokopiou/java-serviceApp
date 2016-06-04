@@ -1,18 +1,12 @@
 package com.github.vaggos.serviceapp;
 
-// Todo: Add check that all fields are provided.
-// Todo: Add check if a spare part already exists.
-
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class InsertActivity extends AppCompatActivity {
@@ -48,56 +42,54 @@ public class InsertActivity extends AppCompatActivity {
         // Get the Proceed button.
         btn_proceed_insert = (Button) findViewById(R.id.btn_proceed_insert);
 
-        // Call AddData.
-        AddData();
-    }
-
-    public void AddData() {
-        // Get the values from the fields.
         // Set listener on Proceed button.
-        btn_proceed_insert.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                // If a value for the spare part has been provided execute try.
-                try {
-                    // Get the value of the spare part text field.
-                    InsertActivity.spare_part = editText_spare_part_insert.getText().toString();
-                } catch (NumberFormatException e) {/* Code here if needed. */}
+        // Get the values from the fields.
+        btn_proceed_insert.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // If a value for the spare part has been provided execute try.
+                        try {
+                            // Get the value of the spare part text field.
+                            InsertActivity.spare_part = editText_spare_part_insert.getText().toString();
+                        } catch (NumberFormatException e) {/* Code here if needed. */}
 
-                // If a value for the kms_changed has been provided execute try.
-                try {
-                    // Get the value of the kms_changed text field.
-                    InsertActivity.kms_changed = Integer.parseInt(editText_kms_changed_insert.getText().toString());
-                } catch (NumberFormatException e) {/* Code here if needed. */}
+                        // If a value for the kms_changed has been provided execute try.
+                        try {
+                            // Get the value of the kms_changed text field.
+                            InsertActivity.kms_changed = Integer.parseInt(editText_kms_changed_insert.getText().toString());
+                        } catch (NumberFormatException e) {/* Code here if needed. */}
 
-                // If a value for the kms_interval has been provided execute try.
-                try {
-                    // Get the value of the kms_interval text field.
-                    InsertActivity.kms_interval = Integer.parseInt(editText_kms_interval_insert.getText().toString());
-                } catch (NumberFormatException e) {/* Code here if needed. */}
+                        // If a value for the kms_interval has been provided execute try.
+                        try {
+                            // Get the value of the kms_interval text field.
+                            InsertActivity.kms_interval = Integer.parseInt(editText_kms_interval_insert.getText().toString());
+                        } catch (NumberFormatException e) {/* Code here if needed. */}
 
-                // If a value for the date_interval has been provided execute try.
-                try {
-                    int day = datePicker_insert.getDayOfMonth();
-                    int month = datePicker_insert.getMonth() + 1;
-                    int year = datePicker_insert.getYear();
-                    // Create the ISO date that will be written to the csv file.
-                    InsertActivity.date_changed = String.format("%02d", year) + "-" + String.format("%02d", month) + "-" + String.format("%02d", day);
-                } catch (NumberFormatException e) {/* Code here if needed. */}
+                        // If a value for the date_interval has been provided execute try.
+                        try {
+                            int day = datePicker_insert.getDayOfMonth();
+                            int month = datePicker_insert.getMonth() + 1;
+                            int year = datePicker_insert.getYear();
+                            // Create the ISO date that will be written to the csv file.
+                            InsertActivity.date_changed = String.format("%02d", year) + "-" + String.format("%02d", month) + "-" + String.format("%02d", day);
+                        } catch (NumberFormatException e) {/* Code here if needed. */}
 
-                // If a value for the date_interval has been provided execute try.
-                try {
-                    // Get the value of the date_interval text field.
-                    InsertActivity.date_interval = Integer.parseInt(editText_date_interval_insert.getText().toString());
-                } catch (NumberFormatException e) {/* Code here if needed. */}
+                        // If a value for the date_interval has been provided execute try.
+                        try {
+                            // Get the value of the date_interval text field.
+                            InsertActivity.date_interval = Integer.parseInt(editText_date_interval_insert.getText().toString());
+                        } catch (NumberFormatException e) {/* Code here if needed. */}
 
-                // Call the method to insert the data.
-                boolean isInserted = serviceDb.insertData(spare_part, date_changed, date_interval, kms_changed, kms_interval);
-                if (isInserted) {
-                    Toast.makeText(InsertActivity.this, "Data successfully inserted.", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(InsertActivity.this, "Data failed to be inserted.", Toast.LENGTH_LONG).show();
+                        // Call the method to insert the data.
+                        boolean isInserted = serviceDb.insertData(spare_part, date_changed, date_interval, kms_changed, kms_interval);
+                        if (isInserted) {
+                            Toast.makeText(InsertActivity.this, spare_part + " successfully inserted.", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(InsertActivity.this, spare_part + " failed to be inserted.", Toast.LENGTH_LONG).show();
+                        }
+                    }
                 }
-            }
-        });
+        );
     }
 }
