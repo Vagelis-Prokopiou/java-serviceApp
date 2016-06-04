@@ -86,6 +86,14 @@
                     android:layout_centerHorizontal="true"
                     android:text="@string/available_entries" />
 
+                <Button
+                    android:id="@+id/btn_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_below="@+id/scrollView_2"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/about" />
+
             </LinearLayout>
         </ScrollView>
 

@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Button btn_insert = (Button) findViewById(R.id.btn_insert);
         Button btn_available = (Button) findViewById(R.id.btn_available);
         Button btn_delete = (Button) findViewById(R.id.btn_delete);
+        Button btn_about = (Button) findViewById(R.id.btn_about);
 
         // Get all the data from the database.
         Cursor result = db.getAllData();
@@ -110,6 +111,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Set a listener to btn_update.
+        btn_about.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Launch the About Activity.
+                        Intent aboutIntent = new Intent(MainActivity.this, AboutActivity.class);
+                        startActivity(aboutIntent);
+                    }
+                }
+        );
     }
 }
 
