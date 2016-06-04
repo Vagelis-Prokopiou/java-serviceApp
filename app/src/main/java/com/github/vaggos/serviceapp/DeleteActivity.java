@@ -33,18 +33,20 @@ public class DeleteActivity extends AppCompatActivity {
 
         // Build the String Array with the db data.
         Cursor cursor = serviceDb.getAllData();
-        final String[][] dataArray = new String[cursor.getCount()][1];
+        final String[][] dataArray = new String[cursor.getCount()][2];
         int j = 0;
         while (cursor.moveToNext()) {
+            String id = cursor.getString(0);
             String spare_part = cursor.getString(1);
-            dataArray[j][0] = spare_part;
+            dataArray[j][0] = id;
+            dataArray[j][1] = spare_part;
             j++;
         }
 
         // Prepare the message for the spare part selection.
         String message = "";
         for (int i = 0; i < dataArray.length; i++) {
-            String name = dataArray[i][0];
+            String name = dataArray[i][1];
             message += "For " + name + ", enter " + (i + 1) + ".\n";
         }
 
@@ -56,16 +58,16 @@ public class DeleteActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String id = null;
+                        int index = -1;
                         try {
-                            id = editText_spare_part_delete.getText().toString();
+                            index = Integer.parseInt(editText_spare_part_delete.getText().toString());
                         } catch (Exception e) {/*Code here.*/}
-                        if (id != null) {
-                            int result = serviceDb.deleteData(id);
+                        if (index > -1) {
+                            int result = serviceDb.deleteData(dataArray[index - 1][0]);
                             if (result > 0) {
-                                Toast.makeText(getApplicationContext(), "Entry successfully deleted.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), dataArray[index - 1][1] + " successfully deleted.", Toast.LENGTH_LONG).show();
                             } else {
-                                Toast.makeText(getApplicationContext(), "Entry failed to delete.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), dataArray[index - 1][1] + " failed to delete.", Toast.LENGTH_LONG).show();
                             }
                         }
                     }
