@@ -105,7 +105,7 @@ public class CheckActivity extends AppCompatActivity {
                         // Check the kms.
                         if (CheckActivity.global_kms - kms_changed >= kms_interval) {
                             // Build the message.
-                            message += "• " + spare_part + ": Exceeded the allowed " + kms_interval + " kms between changes, for " + (CheckActivity.global_kms - kms_changed) + " kms.\n";
+                            message += spare_part + " kms status:\nExceeded the allowed " + kms_interval + " kms between changes, for " + (CheckActivity.global_kms - kms_changed) + " kms.\n\n";
                         }
 
                         // Check the dates.
@@ -113,7 +113,7 @@ public class CheckActivity extends AppCompatActivity {
                             // Format the date to ISO, for printing.
                             SimpleDateFormat date_format = new SimpleDateFormat("yyyy-MM-dd");
                             String stringDate = date_format.format(date_interval);
-                            message += "• " + spare_part + ": Exceeded the allowed " + dateInterval + " months between changes. It should have been changed on " + stringDate + ".\n";
+                            message += spare_part + " months status:\nExceeded the allowed " + dateInterval + " months between changes. It should have been changed on " + stringDate + ".\n\n";
                         }
                     }
                     // Print the result.
