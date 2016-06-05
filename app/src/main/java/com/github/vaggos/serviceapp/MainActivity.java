@@ -34,17 +34,17 @@ public class MainActivity extends AppCompatActivity {
             // No data. Pre-populate.
             db.insertData("Oil", "2012-01-01", 6, 5000, 3000);
             db.insertData("Oil filter", "2012-01-01", 6, 5000, 3000);
-            db.insertData("Air filter", "2012-01-01", 6, 5000, 3000);
-            db.insertData("Cabin air filter", "2012-01-01", 6, 5000, 3000);
-            db.insertData("Spark plug", "2012-01-01", 6, 5000, 3000);
-            db.insertData("Coolant", "2012-01-01", 6, 5000, 3000);
             db.insertData("Front brake pads", "2012-01-01", 6, 5000, 3000);
             db.insertData("Rear brake pads", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Spark plug", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Coolant", "2012-01-01", 6, 5000, 3000);
             db.insertData("Timing belt", "2012-01-01", 6, 5000, 3000);
-            db.insertData("Brake fluid", "2012-01-01", 6, 5000, 3000);
-            db.insertData("Windshield wiper", "2012-01-01", 6, 5000, 3000);
-            db.insertData("Transmission fluid", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Air filter", "2012-01-01", 6, 5000, 3000);
             db.insertData("Battery", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Cabin air filter", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Brake fluid", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Transmission fluid", "2012-01-01", 6, 5000, 3000);
+            db.insertData("Windshield wiper", "2012-01-01", 6, 5000, 3000);
         }
 
         // Set a listener to btn_check.
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         // Set a listener to btn_insert.
         btn_insert.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                // Launch the Update Activity.
+                // Launch the Insert Activity.
                 Intent insertIntent = new Intent(MainActivity.this, InsertActivity.class);
                 startActivity(insertIntent);
             }
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 Cursor result = db.getAllData();
                 // If there are no results, prepopulate the db.
                 if (result.getCount() == 0) {
-                    // This must never be valid since the db is prepopulated.
+                    // This must never be valid since the db is pre-populated.
                 } else {
                     // Build and show the results.
                     StringBuffer buffer = new StringBuffer();
@@ -125,12 +125,12 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        // Set a listener to btn_about.
+        // Set a listener to btn_donate.
         btn_donate.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // Launch the About Activity.
+                        // Launch the Donate Activity.
                         Intent donateIntent = new Intent(MainActivity.this, DonateActivity.class);
                         startActivity(donateIntent);
                     }
