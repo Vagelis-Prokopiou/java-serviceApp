@@ -38,7 +38,7 @@
     <string name="title_activity_donate">Donate</string>
     <string name="textView_body_donate">This app has been kept clean from annoying advertisements.\n\nFurthermore, all the features that may be added to future versions (according to the feedback that I will receive), will be available for all, for free.
         There will not be a \"Lite\" and a paid \"Pro\" version.
-        This project is free and open source.\n\nIf you find this app useful and want to give back, to help further development, or you are appreciative and want to support open source, you can donate by visiting the following url:\nhttps://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=ARHBWV2HYUHHU\n\nAlternatively, you can also \"donate\" code. To do this, visit the project\'s GitHub url:\nhttps://github.com/Vaggos/ServiceApp_Android\n\nEither way, enjoy ServiceApp!
+        This project is free and open source.\n\nIf you find this app useful and want to give back, to help further development, or you are appreciative and want to support open source, you can donate (code or money). For more info, please visit the project\'s GitHub url:\nhttps://github.com/Vaggos/ServiceApp_Android\n\nEither way, enjoy ServiceApp!
     </string>
     <string name="spare_part_to_insert">Spare part to insert</string>
 </resources>
