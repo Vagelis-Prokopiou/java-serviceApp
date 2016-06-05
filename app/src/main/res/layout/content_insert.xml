@@ -58,7 +58,8 @@
                             android:ems="10"
                             android:hint="@string/spare_part"
                             android:textSize="14sp"
-                            android:textColorHint="#000"/>
+                            android:textColorHint="#000"
+                            android:text="@string/spare_part_to_insert" />
 
                         <EditText
                             android:id="@+id/editText_kms_changed_insert"
