@@ -49,7 +49,7 @@
                 <Button
                     android:id="@+id/btn_check"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="55dp"
                     android:layout_below="@+id/scrollView_2"
                     android:layout_centerHorizontal="true"
                     android:text="@string/run_check" />
@@ -57,7 +57,7 @@
                 <Button
                     android:id="@+id/btn_update"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="55dp"
                     android:layout_below="@+id/scrollView_2"
                     android:layout_centerHorizontal="true"
                     android:text="@string/update_entry" />
@@ -65,7 +65,7 @@
                 <Button
                     android:id="@+id/btn_insert"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="55dp"
                     android:layout_below="@+id/scrollView_2"
                     android:layout_centerHorizontal="true"
                     android:text="@string/insert_new_entry" />
@@ -73,7 +73,7 @@
                 <Button
                     android:id="@+id/btn_delete"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="55dp"
                     android:layout_below="@+id/scrollView_2"
                     android:layout_centerHorizontal="true"
                     android:text="@string/delete_entry" />
@@ -81,7 +81,7 @@
                 <Button
                     android:id="@+id/btn_available"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="55dp"
                     android:layout_below="@+id/scrollView_2"
                     android:layout_centerHorizontal="true"
                     android:text="@string/available_entries" />
@@ -89,7 +89,7 @@
                 <Button
                     android:id="@+id/btn_about"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="55dp"
                     android:layout_below="@+id/scrollView_2"
                     android:layout_centerHorizontal="true"
                     android:text="@string/about" />
@@ -97,7 +97,7 @@
                 <Button
                     android:id="@+id/btn_donate"
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="55dp"
                     android:layout_below="@+id/scrollView_2"
                     android:layout_centerHorizontal="true"
                     android:text="@string/title_activity_donate" />
