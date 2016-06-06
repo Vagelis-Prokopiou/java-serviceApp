@@ -11,4 +11,7 @@ Perform one of the tasks below by clicking the respective button:
 - See all the available data entries.
 - Delete existing data entries.
 
-Enjoy ServiceApp!
+## Contribute
+If you would like to contribute, you can create a pull request with a new feature, or a bug fix for a corresponding issue.
+
+In any case, enjoy ServiceApp!
