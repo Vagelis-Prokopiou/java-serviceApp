@@ -33,12 +33,7 @@
     <string name="serviceapp">ServiceApp</string>
     <string name="about_body">Thank you for using ServiceApp.\n\nThis app intends to help you simplify and automate the management of the periodic maintenance of your vehicle.\n\nThe app was designed to be simple, easy and straightforward.
         It comes with a pre-populated database of the most common spare parts. You must update these initial entries, according to your vehicle specs.
-        Moreover, you can easily add or remove entries, to suit your specific needs.\n\nFor suggestions or bugs, please visit the project\'s GitHub url:\nhttps://github.com/Vaggos/ServiceApp_Android\n\nFor questions or anything else, you can email me at the email provided below.\n\nIf you find this app useful, consider taking a quick read of the \"Donate\" portion of the app, by clicking the \"Donate\" button below.\n\nAuthor: Vagelis Prokopiou.\nEmail: <a href="mailto:drz4007@gmail.com">drz4007@gmail.com</a>
-    </string>
-    <string name="title_activity_donate">Donate</string>
-    <string name="textView_body_donate">This app has been kept clean from annoying advertisements.\n\nFurthermore, all the features that may be added to future versions (according to the feedback that I will receive), will be available for all, for free.
-        There will not be a \"Lite\" and a paid \"Pro\" version.
-        This project is free and open source.\n\nIf you find this app useful and want to give back, to help further development, or you are appreciative and want to support open source, you can donate (code or money). For more info, please visit the project\'s GitHub url:\nhttps://github.com/Vaggos/ServiceApp_Android\n\nEither way, enjoy ServiceApp!
+        Moreover, you can easily add or remove entries, to suit your specific needs.\n\nFor suggestions or bugs, please visit the project\'s GitHub url:\nhttps://github.com/Vaggos/ServiceApp_Android\n\nFor questions or anything else, you can email me at the email provided below.\n\nAuthor: Vagelis Prokopiou.\nEmail: <a href="mailto:drz4007@gmail.com">drz4007@gmail.com</a>
     </string>
     <string name="spare_part_to_insert">Spare part to insert</string>
 </resources>

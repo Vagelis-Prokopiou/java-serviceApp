@@ -60,15 +60,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.github.vaggos.serviceapp.MainActivity" />
         </activity>
-        <activity
-            android:name=".DonateActivity"
-            android:label="@string/title_activity_donate"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.github.vaggos.serviceapp.MainActivity" />
-        </activity>
+
     </application>
 
 </manifest>

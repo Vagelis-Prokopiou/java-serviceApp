@@ -16,21 +16,6 @@ public class AboutActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // Get the Donate button.
-        Button btn_donate_about = (Button) findViewById(R.id.btn_donate_about);
-
-        // Set listener to btn_donate_about button.
-        btn_donate_about.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Launch the About Activity.
-                        Intent donateIntent = new Intent(AboutActivity.this, DonateActivity.class);
-                        startActivity(donateIntent);
-                    }
-                }
-        );
     }
 
 }

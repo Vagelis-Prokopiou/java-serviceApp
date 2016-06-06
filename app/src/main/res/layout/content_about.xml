@@ -42,14 +42,6 @@
                 android:textColor="#000"
                 android:id="@+id/textView_body_about"
                 android:autoLink="web|email" />
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="70dp"
-                android:text="Donate"
-                android:id="@+id/btn_donate_about"
-                android:layout_marginTop="10dp"/>
-
         </LinearLayout>
     </ScrollView>
 
